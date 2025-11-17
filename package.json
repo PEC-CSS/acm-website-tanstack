@@ -10,7 +10,8 @@
     "format": "biome format --write",
     "format:check": "biome format",
     "lint": "biome lint",
-    "check": "biome check"
+    "check": "biome check",
+    "prepare": "husky"
   },
   "dependencies": {
     "@netlify/vite-plugin-tanstack-start": "^1.0.2",
@@ -42,6 +43,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.0.0",
     "sass": "^1.94.0",
     "typescript": "^5.7.2",
