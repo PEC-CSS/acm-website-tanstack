@@ -22,7 +22,10 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "$components/*": ["./src/components/*"],
+      "$data/*": ["./src/data/*"],
+      "$hooks/*": ["./src/hooks/*"],
+      "$lib/": ["./src/lib/*"]
     }
   }
 }
