@@ -3,7 +3,7 @@ import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
 import { isErrorResponse } from "./helpers";
-import { UserSchema } from "./schemas";
+import { APIUserSchema, UserSchema } from "./schemas";
 
 const ResponseSchema = z.object({
   jwtToken: z.string(),
@@ -12,23 +12,7 @@ const ResponseSchema = z.object({
 
 const APIResponseSchema = z.object({
   jwtToken: z.string(),
-  user: z.object({
-    id: z.number(),
-    name: z.string(),
-    email: z.string(),
-    batch: z.number(),
-    dp: z.string().nullable(),
-    sid: z.number(),
-    verified: z.boolean(),
-    designation: z.enum([
-      "Member",
-      "ImplementationBody",
-      "ExecutiveBody",
-      "Core",
-      "Admin",
-    ]),
-    xp: z.number(),
-  }),
+  user: APIUserSchema,
 });
 
 export const api = new Elysia({ prefix: "/user" })

@@ -1,19 +1,32 @@
 import z from "zod";
 
-export const UserSchema = z.object({
+export const DESIGNATIONS = [
+  "Member",
+  "ImplementationBody",
+  "ExecutiveBody",
+  "Core",
+  "Admin",
+] as const;
+
+export const DesignationEnum = z.enum(DESIGNATIONS);
+
+export const BaseUserSchema = z.object({
   id: z.number(),
   name: z.string(),
-  email: z.string(),
-  batch: z.number(),
-  profile: z.string().nullable(),
-  sid: z.number(),
+  email: z.email(),
+  batch: z.number().int().positive(),
+  sid: z.number().int().positive(),
   verified: z.boolean(),
-  designation: z.literal([
-    "Member",
-    "ImplementationBody",
-    "ExecutiveBody",
-    "Core",
-    "Admin",
-  ]),
+  designation: DesignationEnum,
+});
+
+export const UserSchema = BaseUserSchema.extend({
+  profile: z.string().nullable(),
   experience: z.number(),
+});
+
+export const APIUserSchema = BaseUserSchema.extend({
+  dp: z.string().nullable(),
+  password: z.string(),
+  xp: z.number(),
 });
