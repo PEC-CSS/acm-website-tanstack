@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.5",
+    "@elysiajs/openapi": "^1.4.11",
     "@netlify/vite-plugin-tanstack-start": "^1.0.2",
     "@t3-oss/env-core": "^0.13.8",
     "@tanstack/react-devtools": "^0.7.0",
