@@ -9,6 +9,13 @@ pnpm install
 pnpm start
 ```
 
+Or
+
+``bash
+pnpm install
+pnpm dev
+``
+
 # Building For Production
 
 To build this application for production:
