@@ -12,6 +12,26 @@ const app = new Elysia({
 })
   .use(
     openapi({
+      documentation: {
+        info: {
+          title: "PEC ACM Community Management & Events Platform API",
+          description: `A REST API for managing community members, events, and user engagement for ACM at Punjab Engineering College.
+## Authentication
+Most endpoints require JWT authentication. Obtain a token via the \`POST /v1/user/login\` endpoint and include it in the \`Authorization\` header as a Bearer token.
+
+## Response Format
+All responses follow a consistent JSON structure with appropriate HTTP status codes and error messages.`,
+          version: "1.0.0",
+          license: {
+            name: "MIT",
+            url: "https://github.com/PEC-CSS/acm-website-backend/blob/main/LICENSE",
+          },
+          contact: {
+            name: "PEC ACM Webmaster",
+            email: "bruh@example.com",
+          },
+        },
+      },
       mapJsonSchema: {
         zod: z.toJSONSchema,
       },
