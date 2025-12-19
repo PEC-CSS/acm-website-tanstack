@@ -16,7 +16,7 @@ export const api = new Elysia()
         summary: "Say Hello to the API",
         description:
           "Returns a simple greeting message to verify the API is reachable and responding.",
-        tags: ["Misc.", "Health"],
+        tags: ["Misc."],
       },
     },
   )
@@ -32,7 +32,7 @@ export const api = new Elysia()
         summary: "Perform health check of the API",
         description:
           "Performs a health check on the API and returns the current operational status. Not much different from `GET /api/hello`. ",
-        tags: ["Misc.", "Health"],
+        tags: ["Misc."],
       },
     },
   );

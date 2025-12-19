@@ -92,7 +92,7 @@ On successful authentication, returns a JWT token for subsequent authenticated r
 - **401**: Invalid credentials - email or password is incorrect
 - **404**: User not found - no account exists with the provided email
 - **500**: Server error - an unexpected error occurred during authentication`,
-        tags: ["Authentication", "User"],
+        tags: ["Authentication"],
       },
     },
   );
