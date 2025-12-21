@@ -310,6 +310,166 @@ Once we've created the derived store we can use it in the `App` component just l
 
 You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
 
+## Backend API Spec
+
+##### Base Information
+- **Framework**: Elysia
+- **Validation**: Zod
+- **Purpose**: Health checks, connectivity testing, and uptime verification
+- **Response Format**: Plain text
+
+---
+## `POST /user/login`
+### Name: **User Login Endpoint**
+
+### Details:
+Authenticates a user using their email and password credentials.  
+On successful authentication, returns a JWT token along with normalized user profile information for use in subsequent authenticated requests.
+
+This endpoint acts as a secure authentication gateway and maps the backend API response into a frontend-friendly user model.
+##### Use Cases:
+- User authentication (email/password login)
+- Issuing JWT tokens for protected routes
+- Initial session creation
+- Validating user existence and credentials
+
+### Implementation:
+```ts
+.post(
+  "/login",
+  async ({ body, status }) => {
+    const res = await fetch(API_URL.V1.USER.LOGIN, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response = await res.json();
+
+    if (isErrorResponse(response)) {
+      switch (response.code) {
+        case "Not Found":
+          return status(404, {
+            error: response.code,
+            message: response.message,
+            timestamp: new Date().toISOString(),
+          });
+        case "Unauthorized":
+          return status(401, {
+            error: response.code,
+            message: response.message,
+            timestamp: new Date().toISOString(),
+          });
+        default:
+          return status(500, {
+            error: "Internal Server Error",
+            message: "An unexpected error occurred while handling request",
+            timestamp: new Date().toISOString(),
+          });
+      }
+    }
+
+    const validatedRes = APIResponseSchema.parse(response);
+
+    return {
+      jwtToken: validatedRes.jwtToken,
+      user: {
+        ...validatedRes.user,
+        profile: validatedRes.user.dp,
+        experience: validatedRes.user.xp,
+      },
+    };
+  },
+  {
+    body: z.object({
+      email: z.email("you need to enter a email to login"),
+      password: z.string("you need to enter a password to login"),
+    }),
+    response: {
+      200: ResponseSchema,
+      401: "error",
+      404: "error",
+      500: "error",
+    },
+    detail: {
+      summary: "User login with email and password",
+      description: `Authenticates a user with their email and password credentials. 
+        
+On successful authentication, returns a JWT token for subsequent authenticated requests along with the user's profile information including their designation, batch, experience points, and verification status.`,
+      tags: ["Authentication"],
+    },
+  },
+)
+```
+
+---
+## `GET /hello`
+### Name: **Hello Endpoint**
+
+### Details:
+Returns a simple greeting message to confirm that the API is reachable and responding correctly.  
+Primarily used for smoke tests and quick connectivity checks.
+##### Use Cases:
+- Verify API is running
+- Test network connectivity
+- Debug deployment issues
+- Simple uptime monitoring
+
+### Implementation:
+```ts
+.get(
+  "/hello",
+  async () => {
+    const res = await fetch(API_URL.HEALTH.HELLO);
+    return await res.text();
+  },
+  {
+    response: z.string(),
+    detail: {
+      summary: "Say Hello to the API",
+      description:
+        "Returns a simple greeting message to verify the API is reachable and responding.",
+      tags: ["Misc."],
+    },
+  },
+)
+```
+
+---
+## `GET /health`
+
+### Name: **Health Check Endpoint**
+### Details:
+Performs a health check on the API and returns the current operational status.  
+Semantically intended for monitoring and system-level availability checks rather than manual testing.
+##### Use Cases:
+- Health probes (Kubernetes / Docker)
+- Load balancer health checks
+- Monitoring and alerting systems
+- CI/CD pipeline verification
+
+### Implementation:
+```ts
+.get(
+  "/health",
+  async () => {
+    const res = await fetch(API_URL.HEALTH.CHECK);
+    return await res.text();
+  },
+  {
+    response: z.string(),
+    detail: {
+      summary: "Perform health check of the API",
+      description:
+        "Performs a health check on the API and returns the current operational status. Not much different from `GET /api/hello`.",
+      tags: ["Misc."],
+    },
+  },
+)
+```
+
 # Demo files
 
 Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
