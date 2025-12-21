@@ -12,7 +12,7 @@
     "lint": "biome lint",
     "check": "biome check",
     "prepare": "husky",
-    "email:dev": "email dev --dir=./src/emails"
+    "email:dev": "email dev --dir=./src/emails --port=2999"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.5",
