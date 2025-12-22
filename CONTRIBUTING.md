@@ -5,7 +5,7 @@ Thank you for investing your time in contributing to PEC ACM Website! Any contri
 In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
 
 > [!IMPORTANT]
-> We don't really care if you use LLMs/Coding Agents to **help** with your PRs (_keyword: help_), but we expect you to fully understand the code in you PR, as we might question some design decision while reviewing the PR.
+> We don't really care if you use LLMs/Coding Agents to **help** with your PRs (_keyword: help_), but we expect you to fully understand the code in your PR, as we might question some design decision while reviewing the PR.
 
 ## Setup Local Development Environment
 
@@ -26,6 +26,7 @@ The PEC ACM Website repo is using [pnpm](https://pnpm.io). Make sure you have th
   - Provide a detailed description of the bug in the PR. Live demo preferred.
   - Add appropriate test coverage if applicable.
 - It's OK to have multiple small commits as you work on the PR. GitHub can automatically squash them before merging.
+- Make sure to request a review from either PEC ACM Webmaster or one of the maintainers of the Website, so that we get give you feedback on your PR as soon as possible.
 
 ## Thanks 🩷
 
