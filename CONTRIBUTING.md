@@ -45,8 +45,7 @@ git commit -m "Add feature X"
 git push origin {name}/{my-feature-branch}
 ```
 
-Create a pull request from your fork to the main Neko repository on GitHub.
-
+Create a pull request from your fork to the main PEC ACM Website repository on GitHub.
 
 ## How to Contribute
 
