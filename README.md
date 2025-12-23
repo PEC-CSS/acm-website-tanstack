@@ -27,7 +27,7 @@ src/
 ├── emails/        # React Email templates
 ├── hooks/         # Custom React hooks
 ├── lib/           # Internal packages and utilities
-│   ├── api/       # API clients and queries
+│   ├── api/       # Elysia route handlers and utilities
 │   ├── assets/    # Static assets (images, fonts, icons)
 │   ├── env/       # Environment configuration
 │   ├── schemas/   # Zod validation schemas
