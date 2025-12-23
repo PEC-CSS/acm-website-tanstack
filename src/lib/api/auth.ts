@@ -5,17 +5,17 @@ import { API_URL } from "$lib/constants/api";
 import { isErrorResponse } from "./helpers";
 import { APIUserSchema, UserSchema } from "./schemas";
 
-const ResponseSchema = z.object({
+const LoginResponseSchema = z.object({
   jwtToken: z.string(),
   user: UserSchema,
 });
 
-const APIResponseSchema = z.object({
+const APILoginResponseSchema = z.object({
   jwtToken: z.string(),
   user: APIUserSchema,
 });
 
-export const api = new Elysia({ prefix: "/user" })
+export const api = new Elysia({ prefix: "/auth" })
   .model({
     error: z.object({
       error: z.string(),
@@ -59,7 +59,7 @@ export const api = new Elysia({ prefix: "/user" })
         }
       }
 
-      const validatedRes = APIResponseSchema.parse(response);
+      const validatedRes = APILoginResponseSchema.parse(response);
 
       return {
         jwtToken: validatedRes.jwtToken,
@@ -76,7 +76,7 @@ export const api = new Elysia({ prefix: "/user" })
         password: z.string("you need to enter a password to login"),
       }),
       response: {
-        200: ResponseSchema,
+        200: LoginResponseSchema,
         401: "error",
         404: "error",
         500: "error",
@@ -93,6 +93,21 @@ On successful authentication, returns a JWT token for subsequent authenticated r
 - **404**: User not found - no account exists with the provided email
 - **500**: Server error - an unexpected error occurred during authentication`,
         tags: ["Authentication"],
+      },
+    },
+  )
+  .post(
+    "/verify-email/:token",
+    async ({ params }) => {
+      const token = params.token;
+
+      return { token };
+    },
+    {
+      response: {
+        200: z.object({
+          token: z.string(),
+        }),
       },
     },
   );
