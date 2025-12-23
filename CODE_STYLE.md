@@ -42,6 +42,7 @@ The following path aliases are configured to improve import statements and maint
 - **$components**: Points to the `src/components` directory.
 - **$data**: Points to the `src/data` directory.
 - **$env**: Points to the `src/lib/env` directory.
+- **$emails**: Points to the `src/emails` directory and contains React Email templates.
 - **$hooks**: Points to the `src/hooks` directory.
 - **$lib**: Points to the `src/lib` directory and is the place for creating internal packages.
 - **$assets**: Points to the `src/lib/assets` directory and contains all the static assets used in the project.
