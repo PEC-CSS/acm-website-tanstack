@@ -12,6 +12,7 @@ const app = new Elysia({
 })
   .use(
     openapi({
+      path: "/docs",
       documentation: {
         info: {
           title: "PEC ACM Community Management & Events Platform API",
