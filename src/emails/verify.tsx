@@ -11,6 +11,7 @@ import {
 } from "@react-email/components";
 
 interface VerifyEmailProps {
+  name: string;
   token: string;
 }
 
@@ -19,8 +20,8 @@ const BASE_URL =
     ? "https://pecacm.com"
     : "http://localhost:3000";
 
-function VerifyEmail({ token }: VerifyEmailProps) {
-  const VERIFY_URL = `${BASE_URL}/api/verify-email/${token}`;
+function VerifyEmail({ name, token }: VerifyEmailProps) {
+  const VERIFY_URL = `${BASE_URL}/api/auth/verify-email/${token}`;
 
   return (
     <Html>
@@ -62,7 +63,7 @@ function VerifyEmail({ token }: VerifyEmailProps) {
           as="h2"
           style={{ fontWeight: "500" }}
         >
-          Hello!
+          Hello {name}!
         </Heading>
         <Text>
           You are receiving this email because you registered for PEC ACM.
@@ -112,7 +113,8 @@ function VerifyEmail({ token }: VerifyEmailProps) {
 }
 
 VerifyEmail.PreviewProps = {
-  token: "qwertyuiopasdfghjklzxcvbnm1234567890",
+  name: "Eikichi Onizuka",
+  token: "b29eb4f0-9301-4390-bfec-9ab2fc4e91a6",
 } as VerifyEmailProps;
 
 export default VerifyEmail;
