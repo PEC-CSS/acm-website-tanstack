@@ -1,3 +1,5 @@
+// TODO: Rethink filename.
+
 export const BRANCH_NAMES = [
   "CSE",
   "ECE",

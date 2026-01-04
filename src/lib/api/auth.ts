@@ -141,6 +141,7 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         }
       }
 
+      // TODO: It's more ideal to redirect the user to confirmation page, instead of showing a bland json response.
       return { message: "Your Email was sucessfully verified." };
     },
     {
