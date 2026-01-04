@@ -102,18 +102,55 @@ On successful authentication, returns a JWT token for subsequent authenticated r
       },
     },
   )
-  .post(
+  .get(
     "/verify-email/:token",
-    async ({ params }) => {
+    async ({ params, status }) => {
       const token = params.token;
 
-      return { token };
+      const url = `${API_URL.V1.USER.VERIFY}?${new URLSearchParams({ token })}`;
+
+      const res = await fetch(url, { method: "GET" });
+
+      if (!res.ok) {
+        const response = await res.json();
+
+        if (isErrorResponse(response)) {
+          console.log(response);
+          switch (response.code) {
+            case "Not Found":
+              return status(404, {
+                error: "Not Found",
+                message:
+                  "The provided verification token was not found or has expired",
+                timestamp: new Date().toISOString(),
+              });
+            case "Bad Request":
+              return status(400, {
+                error: "Bad Request",
+                message:
+                  "The Email verification token is not of the expected type.",
+                timestamp: new Date().toISOString(),
+              });
+            default:
+              return status(500, {
+                error: "Internal Server Error",
+                message: "An unexpected error occurred while handling request",
+                timestamp: new Date().toISOString(),
+              });
+          }
+        }
+      }
+
+      return { message: "Your Email was sucessfully verified." };
     },
     {
       response: {
         200: z.object({
-          token: z.string(),
+          message: z.literal("Your Email was sucessfully verified."),
         }),
+        400: "error",
+        404: "error",
+        500: "error",
       },
     },
   )
