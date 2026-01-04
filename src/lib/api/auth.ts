@@ -1,7 +1,13 @@
+import { render, toPlainText } from "@react-email/components";
 import Elysia from "elysia";
+import nodemailer from "nodemailer";
 import z from "zod";
 
+import VerifyEmail from "$emails/verify";
+import { env } from "$env/server";
 import { API_URL } from "$lib/constants/api";
+import { BRANCH_NAMES } from "$lib/constants/details";
+
 import { isErrorResponse } from "./helpers";
 import { APIUserSchema, UserSchema } from "./schemas";
 
@@ -108,6 +114,109 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         200: z.object({
           token: z.string(),
         }),
+      },
+    },
+  )
+  .post(
+    "/register",
+    async ({ body, status }) => {
+      const res = await fetch(API_URL.V1.USER.REGISTER, {
+        method: "POST",
+        body: JSON.stringify({
+          name: body.name,
+          sid: body.sid,
+          branch: body.branch,
+          email: body.email,
+          password: body.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const response = await res.json();
+
+      if (isErrorResponse(response)) {
+        switch (response.code) {
+          case "Bad Request":
+            return status(400, {
+              error: "Bad Request",
+              message: response.message,
+              timestamp: new Date().toISOString(),
+            });
+          default:
+            return status(500, {
+              error: "Internal Server Error",
+              message: "An unexpected error occurred while handling request",
+              timestamp: new Date().toISOString(),
+            });
+        }
+      }
+
+      const emailToken = response.emailToken;
+
+      const transporter = nodemailer.createTransport({
+        host: env.SMTP_HOST,
+        port: env.SMTP_PORT,
+        auth: {
+          user: env.SMTP_EMAIL,
+          pass: env.SMTP_PASS,
+        },
+      });
+
+      const html = await render(
+        VerifyEmail({ name: body.name, token: emailToken }),
+      );
+      const text = toPlainText(html);
+
+      await transporter.sendMail({
+        from: `PEC ACM <${env.SMTP_EMAIL}>`,
+        to: body.email,
+        subject: "New Account Verification",
+        text,
+        html,
+      });
+
+      return {
+        message:
+          "Account created! Please check your email to verify your account",
+      };
+    },
+    {
+      body: z
+        .object({
+          name: z
+            .string()
+            .trim()
+            .min(1, "Name is required")
+            .max(100, "Name too long"),
+          email: z.email().endsWith("@pec.edu.in", {
+            error: "We only accept '@pec.edu.in' emails.",
+          }),
+          branch: z.enum(BRANCH_NAMES),
+          sid: z.int().min(10000000).max(99999999),
+          password: z
+            .string()
+            .regex(
+              /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).)/gm,
+              "The password needs atleast 1 lowercase character, 1 uppercase character, 1 number and 1 special character",
+            )
+            .min(8)
+            .max(20, "You sure you can remember that?"),
+          confirmPassword: z.string().min(1, "Please confirm your password"),
+        })
+        .refine(data => data.password === data.confirmPassword, {
+          error: "Password and confirm password are not same.",
+          path: ["confirmPassword"],
+        }),
+      response: {
+        200: z.object({
+          message: z.literal(
+            "Account created! Please check your email to verify your account",
+          ),
+        }),
+        400: "error",
+        500: "error",
       },
     },
   );
