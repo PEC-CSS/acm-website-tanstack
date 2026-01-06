@@ -164,7 +164,7 @@ The token is sent to the user's registered email address during account registra
 - **400**: Invalid or malformed token
 - **404**: Token not found or expired
 - **500**: Server error`,
-        tags: ["Registration"],
+        tags: ["Authentication"],
       },
     },
   )
@@ -280,7 +280,7 @@ The user must verify their email before logging in.
 - **200**: Account created and verification email sent
 - **400**: Validation error or duplicate account
 - **500**: Server error`,
-        tags: ["Registration"],
+        tags: ["Authentication"],
       },
     },
   );
