@@ -153,6 +153,19 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         404: "error",
         500: "error",
       },
+      detail: {
+        summary: "Verify user email",
+        description: `Verifies a user's email address using a one-time verification token.
+    
+The token is sent to the user's registered email address during account registration.
+
+**Response Codes:**
+- **200**: Email successfully verified
+- **400**: Invalid or malformed token
+- **404**: Token not found or expired
+- **500**: Server error`,
+        tags: ["Registration"],
+      },
     },
   )
   .post(
@@ -255,6 +268,19 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         }),
         400: "error",
         500: "error",
+      },
+      detail: {
+        summary: "Register a new user",
+        description: `Creates a new user account and sends an email verification link.
+    
+Only '@pec.edu.in' email addresses are accepted.  
+The user must verify their email before logging in.
+    
+**Response Codes:**
+- **200**: Account created and verification email sent
+- **400**: Validation error or duplicate account
+- **500**: Server error`,
+        tags: ["Registration"],
       },
     },
   );
