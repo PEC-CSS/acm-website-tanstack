@@ -63,22 +63,7 @@ pnpm check         # Run all checks (format + lint)
 
 ## Development
 
-### Path Aliases
-
-- `$components` → `src/components`
-- `$data` → `src/data`
-- `$env` → `src/lib/env`
-- `$emails` → `src/emails`
-- `$hooks` → `src/hooks`
-- `$lib` → `src/lib`
-- `$assets` → `src/lib/assets`
-- `$styles` → `src/styles`
-
-### Code Style
-
-This project uses Biome for formatting and linting. Pre-commit hooks are configured with Husky.
-
-Read the full style guide: [CODE_STYLE.md](./CODE_STYLE.md)
+See [DEVELOPMENT.md](./DEVELOPMENT.md) for development guide.
 
 ## Contributing
 
