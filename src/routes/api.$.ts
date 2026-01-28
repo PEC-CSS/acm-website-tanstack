@@ -5,7 +5,7 @@ import { createIsomorphicFn } from "@tanstack/react-start";
 import { Elysia } from "elysia";
 import * as z from "zod";
 
-import { auth, health } from "$lib/api";
+import { assign, auth, health } from "$lib/api";
 
 const app = new Elysia({
   prefix: "/api",
@@ -40,6 +40,7 @@ All responses follow a consistent JSON structure with appropriate HTTP status co
   )
   .use(health)
   .use(auth)
+  .use(assign)
   .get("/", "Hello PEC ACM!");
 
 const handle = ({ request }: { request: Request }) => app.fetch(request);
