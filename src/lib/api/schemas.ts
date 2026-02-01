@@ -1,5 +1,16 @@
 import z from "zod";
 
+export const BRANCHES = [
+  "DEVELOPMENT",
+  "AI",
+  "CP",
+  "CYBER",
+  "SOCIALS",
+  "WIT",
+] as const;
+
+export const BranchEnum = z.enum(BRANCHES);
+
 export const DESIGNATIONS = [
   "Member",
   "ImplementationBody",
@@ -29,4 +40,16 @@ export const APIUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
+});
+
+export const BaseEventSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  branch: BranchEnum,
+  startDate: z.string(),
+  endDate: z.string(),
+  description: z.string(),
+  relatedLink: z.string(),
+  venue: z.string(),
+  ended: z.boolean(),
 });
