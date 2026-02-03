@@ -21,7 +21,7 @@ export const api = new Elysia({ prefix: "/user" })
         method: "POST",
         body: JSON.stringify(body),
         headers: {
-          Authorization: `bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });

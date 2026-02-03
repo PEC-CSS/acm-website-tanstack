@@ -17,9 +17,9 @@ export const api = new Elysia({ prefix: "/events" })
     }),
   })
   .get(
-    "/get-event/:eventId",
+    "/:id",
     async ({ params, status }) => {
-      const eventId = params.eventId;
+      const eventId = params.id;
 
       const url = `${API_URL.V1.EVENTS.BY_ID.GET(eventId)}`;
 
@@ -60,7 +60,7 @@ export const api = new Elysia({ prefix: "/events" })
     },
     {
       params: z.object({
-        eventId: z.coerce.number(),
+        id: z.coerce.number(),
       }),
       response: {
         200: BaseEventSchema,
@@ -75,7 +75,7 @@ export const api = new Elysia({ prefix: "/events" })
     },
   )
   .post(
-    "/create-event",
+    "/",
     async ({ body, status, token }) => {
       const res = await fetch(API_URL.V1.EVENTS.CREATE, {
         method: "POST",
@@ -91,7 +91,7 @@ export const api = new Elysia({ prefix: "/events" })
           ended: body.ended,
         }),
         headers: {
-          Authorization: `bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
