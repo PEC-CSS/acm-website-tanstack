@@ -72,10 +72,10 @@ export const api = new Elysia({ prefix: "/events" })
         summary: "Get event detail",
         description: "Gets the details of an event using it's eventId",
       },
-    }
+    },
   )
   .post(
-    "/create-event", 
+    "/create-event",
     async ({ body, status, token }) => {
       const res = await fetch(API_URL.V1.EVENTS.CREATE, {
         method: "POST",
@@ -88,7 +88,7 @@ export const api = new Elysia({ prefix: "/events" })
           description: body.description,
           relatedLink: body.relatedLink,
           venue: body.venue,
-          ended: body.ended
+          ended: body.ended,
         }),
         headers: {
           Authorization: `bearer ${token}`,
