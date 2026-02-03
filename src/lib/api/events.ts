@@ -4,8 +4,8 @@ import z from "zod";
 import { API_URL } from "$lib/constants/api";
 
 import { isErrorResponse } from "./helpers";
-import { BaseEventSchema, BRANCHES } from "./schemas";
 import { requireAuth } from "./macros";
+import { BaseEventSchema, BRANCHES } from "./schemas";
 
 export const api = new Elysia({ prefix: "/events" })
   .use(requireAuth)
@@ -17,14 +17,13 @@ export const api = new Elysia({ prefix: "/events" })
     }),
   })
   .get(
-    "/getEvent/:eventId",
+    "/get-event/:eventId",
     async ({ params, status }) => {
       const eventId = params.eventId;
 
       const url = `${API_URL.V1.EVENTS.BY_ID.GET(eventId)}`;
 
       const res = await fetch(url, { method: "GET" });
-      
       if (!res.ok) {
         const response = await res.json();
 
@@ -50,14 +49,14 @@ export const api = new Elysia({ prefix: "/events" })
                 message: "An unexpected error occurred while handling request",
                 timestamp: new Date().toISOString(),
               });
-            }
           }
         }
+      }
 
-        const response = await res.json();
+      const response = await res.json();
 
-        const validatedRes = BaseEventSchema.parse(response);
-        return validatedRes;
+      const validatedRes = BaseEventSchema.parse(response);
+      return validatedRes;
     },
     {
       params: z.object({
@@ -76,7 +75,7 @@ export const api = new Elysia({ prefix: "/events" })
     }
   )
   .post(
-    "/createEvent", 
+    "/create-event", 
     async ({ body, status, token }) => {
       const res = await fetch(API_URL.V1.EVENTS.CREATE, {
         method: "POST",
@@ -118,20 +117,18 @@ export const api = new Elysia({ prefix: "/events" })
           default:
             return status(500, {
               error: "Internal Server Error",
-              message:
-                "An unexpected error occurred while handling request",
+              message: "An unexpected error occurred while handling request",
               timestamp: new Date().toISOString(),
             });
-          }
         }
+      }
 
       const validatedRes = BaseEventSchema.parse(response);
       return validatedRes;
     },
     {
       requireAuth: true,
-      body: z
-      .object({
+      body: z.object({
         id: z.number(),
         title: z.string(),
         branch: z.enum(BRANCHES),

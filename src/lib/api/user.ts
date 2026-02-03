@@ -5,7 +5,7 @@ import { API_URL } from "$lib/constants/api";
 import { isErrorResponse } from "./helpers";
 import { requireAuth } from "./macros";
 
-export const api = new Elysia({ prefix: "/assign" })
+export const api = new Elysia({ prefix: "/user" })
   .use(requireAuth)
   .model({
     error: z.object({
@@ -48,8 +48,7 @@ export const api = new Elysia({ prefix: "/assign" })
             default:
               return status(500, {
                 error: "Internal Server Error",
-                message:
-                  "An unexpected error occurred while handling request",
+                message: "An unexpected error occurred while handling request",
                 timestamp: new Date().toISOString(),
               });
           }
@@ -79,5 +78,5 @@ export const api = new Elysia({ prefix: "/assign" })
         summary: "Assign role to a user",
         description: "Updates the role of a user based on their email address.",
       },
-    }
+    },
   );

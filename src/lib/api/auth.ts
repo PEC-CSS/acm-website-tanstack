@@ -30,7 +30,7 @@ export const api = new Elysia({ prefix: "/auth" })
     }),
   })
   .post(
-    "/login",
+    "/sign-in",
     async ({ body, status }) => {
       const res = await fetch(API_URL.V1.USER.LOGIN, {
         method: "POST",
@@ -169,7 +169,7 @@ The token is sent to the user's registered email address during account registra
     },
   )
   .post(
-    "/register",
+    "/sign-up",
     async ({ body, status }) => {
       const res = await fetch(API_URL.V1.USER.REGISTER, {
         method: "POST",
