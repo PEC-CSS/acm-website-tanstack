@@ -22,3 +22,6 @@ export function isErrorResponse(res: unknown): res is APIErrorResponse {
     res.message.trim() !== ""
   );
 }
+
+export const ERROR_STATUS_CODES = [400, 401, 403, 404, 409, 500] as const;
+export type ErrorStatusCode = (typeof ERROR_STATUS_CODES)[number];
