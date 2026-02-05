@@ -24,9 +24,10 @@
     "paths": {
       "$components/*": ["./src/components/*"],
       "$data/*": ["./src/data/*"],
-      "$env": ["./src/env.ts"],
+      "$env/*": ["./src/lib/env/*"],
+      "$emails/*": ["./src/emails/*"],
       "$hooks/*": ["./src/hooks/*"],
-      "$lib/": ["./src/lib/*"]
+      "$lib/*": ["./src/lib/*"]
     }
   }
 }
