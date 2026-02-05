@@ -2,8 +2,13 @@ import Elysia from "elysia";
 import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
-import { isErrorResponse } from "./helpers";
-import { requireAuth } from "./macros";
+import { isErrorResponse } from "../types";
+import {
+  createErrorResponse,
+  createResponseSchema,
+  toSuccessResponse,
+} from "../utils/helpers";
+import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/user" })
   .use(requireAuth)
@@ -16,7 +21,7 @@ export const api = new Elysia({ prefix: "/user" })
   })
   .post(
     "/role",
-    async ({ body, status, token }) => {
+    async ({ body, token }) => {
       const res = await fetch(API_URL.V1.USER.ASSIGN_ROLE, {
         method: "POST",
         body: JSON.stringify(body),
@@ -30,50 +35,22 @@ export const api = new Elysia({ prefix: "/user" })
         const response = await res.json();
 
         if (isErrorResponse(response)) {
-          switch (response.code) {
-            case "Not Found":
-              return status(404, {
-                error: response.code,
-                message: response.message,
-                timestamp: new Date().toISOString(),
-              });
-
-            case "Unauthorized":
-              return status(401, {
-                error: response.code,
-                message: response.message,
-                timestamp: new Date().toISOString(),
-              });
-
-            default:
-              return status(500, {
-                error: "Internal Server Error",
-                message: "An unexpected error occurred while handling request",
-                timestamp: new Date().toISOString(),
-              });
-          }
+          return createErrorResponse(response, {
+            allowedCodes: [500],
+          });
         }
       }
 
       const response = await res.text();
-      return response;
+      return toSuccessResponse(response);
     },
     {
       requireAuth: true,
-
       body: z.object({
         email: z.email("Please provide a valid email"),
         newRole: z.string().min(1, "Role is required"),
       }),
-
-      response: {
-        200: z.string(),
-        400: "error",
-        401: "error",
-        404: "error",
-        500: "error",
-      },
-
+      response: createResponseSchema(z.string()),
       detail: {
         summary: "Assign role to a user",
         description: "Updates the role of a user based on their email address.",

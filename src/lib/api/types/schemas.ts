@@ -1,23 +1,7 @@
 import z from "zod";
+import { ACM_BRANCHES, DESIGNATIONS } from "$lib/constants/org";
 
-export const BRANCHES = [
-  "DEVELOPMENT",
-  "AI",
-  "CP",
-  "CYBER",
-  "SOCIALS",
-  "WIT",
-] as const;
-
-export const BranchEnum = z.enum(BRANCHES);
-
-export const DESIGNATIONS = [
-  "Member",
-  "ImplementationBody",
-  "ExecutiveBody",
-  "Core",
-  "Admin",
-] as const;
+export const BranchEnum = z.enum(ACM_BRANCHES);
 
 export const DesignationEnum = z.enum(DESIGNATIONS);
 
