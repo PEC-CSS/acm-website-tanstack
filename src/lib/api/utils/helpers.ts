@@ -82,7 +82,7 @@ export function createErrorResponse<
  * @param successDataSchema - Zod schema describing the shape of the successful response’s `data`.
  * @param options - Optional configuration:
  *   - `successCode`: HTTP status code for success (200 or 201); defaults to 200.
- *   - `errorCodes`: Array of allowed error status codes; defaults to .
+ *   - `errorCodes`: Array of allowed error status codes; defaults to [500].
  *
  * @returns A schema object where:
  *   - `successCode` maps to `toSuccessSchema(successDataSchema)`.

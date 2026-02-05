@@ -6,7 +6,7 @@ import z from "zod";
 import VerifyEmail from "$emails/verify";
 import { env } from "$env/server";
 import { API_URL } from "$lib/constants/api";
-import { BRANCH_NAMES } from "$lib/constants/details";
+import { BRANCH_NAMES } from "$lib/constants/org";
 import { isErrorResponse } from "../types";
 import { APIUserSchema, UserSchema } from "../types/schemas";
 import {

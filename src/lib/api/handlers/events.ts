@@ -2,8 +2,9 @@ import Elysia from "elysia";
 import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
+import { ACM_BRANCHES } from "$lib/constants/org";
 import { isErrorResponse } from "../types";
-import { BaseEventSchema, BRANCHES } from "../types/schemas";
+import { BaseEventSchema } from "../types/schemas";
 import {
   createErrorResponse,
   createResponseSchema,
@@ -94,7 +95,7 @@ export const api = new Elysia({ prefix: "/events" })
       body: z.object({
         id: z.number(),
         title: z.string(),
-        branch: z.enum(BRANCHES),
+        branch: z.enum(ACM_BRANCHES),
         startDate: z.string(),
         endDate: z.string(),
         description: z.string(),

@@ -36,7 +36,7 @@ export const api = new Elysia({ prefix: "/user" })
 
         if (isErrorResponse(response)) {
           return createErrorResponse(response, {
-            allowedCodes: [400, 401, 404, 500],
+            allowedCodes: [500],
           });
         }
       }
@@ -46,14 +46,11 @@ export const api = new Elysia({ prefix: "/user" })
     },
     {
       requireAuth: true,
-
       body: z.object({
         email: z.email("Please provide a valid email"),
         newRole: z.string().min(1, "Role is required"),
       }),
-      response: createResponseSchema(z.string(), {
-        errorCodes: [400, 401, 404, 500],
-      }),
+      response: createResponseSchema(z.string()),
       detail: {
         summary: "Assign role to a user",
         description: "Updates the role of a user based on their email address.",
