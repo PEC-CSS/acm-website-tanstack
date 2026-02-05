@@ -2,10 +2,14 @@ import Elysia from "elysia";
 import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
-
-import { isErrorResponse } from "./helpers";
-import { requireAuth } from "./macros";
-import { BaseEventSchema, BRANCHES } from "./schemas";
+import { isErrorResponse } from "../types";
+import { BaseEventSchema, BRANCHES } from "../types/schemas";
+import {
+  createErrorResponse,
+  createResponseSchema,
+  toSuccessResponse,
+} from "../utils/helpers";
+import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/events" })
   .use(requireAuth)
@@ -18,7 +22,7 @@ export const api = new Elysia({ prefix: "/events" })
   })
   .get(
     "/:id",
-    async ({ params, status }) => {
+    async ({ params }) => {
       const eventId = params.id;
 
       const url = `${API_URL.V1.EVENTS.BY_ID.GET(eventId)}`;
@@ -28,46 +32,24 @@ export const api = new Elysia({ prefix: "/events" })
         const response = await res.json();
 
         if (isErrorResponse(response)) {
-          switch (response.code) {
-            case "Not Found":
-              return status(404, {
-                error: response.code,
-                message: response.message,
-                timestamp: new Date().toISOString(),
-              });
-
-            case "Unauthorized":
-              return status(401, {
-                error: response.code,
-                message: response.message,
-                timestamp: new Date().toISOString(),
-              });
-
-            default:
-              return status(500, {
-                error: "Internal Server Error",
-                message: "An unexpected error occurred while handling request",
-                timestamp: new Date().toISOString(),
-              });
-          }
+          return createErrorResponse(response, {
+            allowedCodes: [401, 404, 500],
+          });
         }
       }
 
       const response = await res.json();
 
       const validatedRes = BaseEventSchema.parse(response);
-      return validatedRes;
+      return toSuccessResponse(validatedRes);
     },
     {
       params: z.object({
         id: z.coerce.number(),
       }),
-      response: {
-        200: BaseEventSchema,
-        401: "error",
-        404: "error",
-        500: "error",
-      },
+      response: createResponseSchema(BaseEventSchema, {
+        errorCodes: [401, 404, 500],
+      }),
       detail: {
         summary: "Get event detail",
         description: "Gets the details of an event using it's eventId",
@@ -76,7 +58,7 @@ export const api = new Elysia({ prefix: "/events" })
   )
   .post(
     "/",
-    async ({ body, status, token }) => {
+    async ({ body, token }) => {
       const res = await fetch(API_URL.V1.EVENTS.CREATE, {
         method: "POST",
         body: JSON.stringify({
@@ -99,32 +81,13 @@ export const api = new Elysia({ prefix: "/events" })
       const response = await res.json();
 
       if (isErrorResponse(response)) {
-        switch (response.code) {
-          case "Not Found":
-            return status(404, {
-              error: response.code,
-              message: response.message,
-              timestamp: new Date().toISOString(),
-            });
-
-          case "Unauthorized":
-            return status(401, {
-              error: response.code,
-              message: response.message,
-              timestamp: new Date().toISOString(),
-            });
-
-          default:
-            return status(500, {
-              error: "Internal Server Error",
-              message: "An unexpected error occurred while handling request",
-              timestamp: new Date().toISOString(),
-            });
-        }
+        return createErrorResponse(response, {
+          allowedCodes: [401, 404, 500],
+        });
       }
 
       const validatedRes = BaseEventSchema.parse(response);
-      return validatedRes;
+      return toSuccessResponse(validatedRes);
     },
     {
       requireAuth: true,
@@ -139,11 +102,8 @@ export const api = new Elysia({ prefix: "/events" })
         venue: z.string(),
         ended: z.boolean(),
       }),
-      response: {
-        200: BaseEventSchema,
-        401: "error",
-        404: "error",
-        500: "error",
-      },
+      response: createResponseSchema(BaseEventSchema, {
+        errorCodes: [401, 404, 500],
+      }),
     },
   );

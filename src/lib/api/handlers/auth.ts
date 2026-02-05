@@ -7,12 +7,16 @@ import VerifyEmail from "$emails/verify";
 import { env } from "$env/server";
 import { API_URL } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/details";
-
-import { isErrorResponse } from "./helpers";
-import { APIUserSchema, UserSchema } from "./schemas";
+import { isErrorResponse } from "../types";
+import { APIUserSchema, UserSchema } from "../types/schemas";
+import {
+  createErrorResponse,
+  createResponseSchema,
+  toSuccessResponse,
+} from "../utils/helpers";
 
 const LoginResponseSchema = z.object({
-  jwtToken: z.string(),
+  token: z.string(),
   user: UserSchema,
 });
 
@@ -24,6 +28,7 @@ const APILoginResponseSchema = z.object({
 export const api = new Elysia({ prefix: "/auth" })
   .model({
     error: z.object({
+      success: z.literal(false),
       error: z.string(),
       message: z.string(),
       timestamp: z.iso.datetime(),
@@ -31,7 +36,7 @@ export const api = new Elysia({ prefix: "/auth" })
   })
   .post(
     "/sign-in",
-    async ({ body, status }) => {
+    async ({ body, set }) => {
       const res = await fetch(API_URL.V1.USER.LOGIN, {
         method: "POST",
         body: JSON.stringify(body),
@@ -43,50 +48,32 @@ export const api = new Elysia({ prefix: "/auth" })
       const response = await res.json();
 
       if (isErrorResponse(response)) {
-        switch (response.code) {
-          case "Not Found":
-            return status(404, {
-              error: response.code,
-              message: response.message,
-              timestamp: new Date().toISOString(),
-            });
-          case "Unauthorized":
-            return status(401, {
-              error: response.code,
-              message: response.message,
-              timestamp: new Date().toISOString(),
-            });
-          default:
-            return status(500, {
-              error: "Internal Server Error",
-              message: "An unexpected error occurred while handling request",
-              timestamp: new Date().toISOString(),
-            });
-        }
+        return createErrorResponse(response, {
+          allowedCodes: [401, 404, 500],
+        });
       }
 
       const validatedRes = APILoginResponseSchema.parse(response);
 
-      return {
-        jwtToken: validatedRes.jwtToken,
+      set.headers.authorization = `Bearer ${validatedRes.jwtToken}`;
+
+      return toSuccessResponse({
+        token: validatedRes.jwtToken,
         user: {
           ...validatedRes.user,
           profile: validatedRes.user.dp,
           experience: validatedRes.user.xp,
         },
-      };
+      });
     },
     {
       body: z.object({
         email: z.email("you need to enter a email to login"),
         password: z.string("you need to enter a password to login"),
       }),
-      response: {
-        200: LoginResponseSchema,
-        401: "error",
-        404: "error",
-        500: "error",
-      },
+      response: createResponseSchema(LoginResponseSchema, {
+        errorCodes: [401, 404, 500],
+      }),
       detail: {
         summary: "User login with email and password",
         description: `Authenticates a user with their email and password credentials. 
@@ -104,7 +91,7 @@ On successful authentication, returns a JWT token for subsequent authenticated r
   )
   .get(
     "/verify-email/:token",
-    async ({ params, status }) => {
+    async ({ params }) => {
       const token = params.token;
 
       const url = `${API_URL.V1.USER.VERIFY}?${new URLSearchParams({ token })}`;
@@ -115,44 +102,30 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         const response = await res.json();
 
         if (isErrorResponse(response)) {
-          console.log(response);
-          switch (response.code) {
-            case "Not Found":
-              return status(404, {
-                error: "Not Found",
-                message:
-                  "The provided verification token was not found or has expired",
-                timestamp: new Date().toISOString(),
-              });
-            case "Bad Request":
-              return status(400, {
-                error: "Bad Request",
-                message:
-                  "The Email verification token is not of the expected type.",
-                timestamp: new Date().toISOString(),
-              });
-            default:
-              return status(500, {
-                error: "Internal Server Error",
-                message: "An unexpected error occurred while handling request",
-                timestamp: new Date().toISOString(),
-              });
-          }
+          return createErrorResponse(response, {
+            customMessages: {
+              400: "The Email verification token is not of the expected type.",
+              404: "The provided verification token was not found or has expired",
+            },
+            allowedCodes: [400, 404],
+          });
         }
       }
 
       // TODO: It's more ideal to redirect the user to confirmation page, instead of showing a bland json response.
-      return { message: "Your Email was sucessfully verified." };
+      return toSuccessResponse({
+        message: "Your Email was sucessfully verified.",
+      });
     },
     {
-      response: {
-        200: z.object({
+      response: createResponseSchema(
+        z.object({
           message: z.literal("Your Email was sucessfully verified."),
         }),
-        400: "error",
-        404: "error",
-        500: "error",
-      },
+        {
+          errorCodes: [400, 404, 500],
+        },
+      ),
       detail: {
         summary: "Verify user email",
         description: `Verifies a user's email address using a one-time verification token.
@@ -170,7 +143,7 @@ The token is sent to the user's registered email address during account registra
   )
   .post(
     "/sign-up",
-    async ({ body, status }) => {
+    async ({ body }) => {
       const res = await fetch(API_URL.V1.USER.REGISTER, {
         method: "POST",
         body: JSON.stringify({
@@ -188,20 +161,9 @@ The token is sent to the user's registered email address during account registra
       const response = await res.json();
 
       if (isErrorResponse(response)) {
-        switch (response.code) {
-          case "Bad Request":
-            return status(400, {
-              error: "Bad Request",
-              message: response.message,
-              timestamp: new Date().toISOString(),
-            });
-          default:
-            return status(500, {
-              error: "Internal Server Error",
-              message: "An unexpected error occurred while handling request",
-              timestamp: new Date().toISOString(),
-            });
-        }
+        return createErrorResponse(response, {
+          allowedCodes: [400, 500],
+        });
       }
 
       const emailToken = response.emailToken;
@@ -228,10 +190,10 @@ The token is sent to the user's registered email address during account registra
         html,
       });
 
-      return {
+      return toSuccessResponse({
         message:
           "Account created! Please check your email to verify your account",
-      };
+      });
     },
     {
       body: z
@@ -260,15 +222,14 @@ The token is sent to the user's registered email address during account registra
           error: "Password and confirm password are not same.",
           path: ["confirmPassword"],
         }),
-      response: {
-        200: z.object({
+      response: createResponseSchema(
+        z.object({
           message: z.literal(
             "Account created! Please check your email to verify your account",
           ),
         }),
-        400: "error",
-        500: "error",
-      },
+        { errorCodes: [400, 500] },
+      ),
       detail: {
         summary: "Register a new user",
         description: `Creates a new user account and sends an email verification link.
