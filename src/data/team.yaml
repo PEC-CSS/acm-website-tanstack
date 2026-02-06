@@ -1,0 +1,63 @@
+core:
+  - name: Gurmehar Singh
+    title: Chairperson
+    avatar: "leads/gurmehar.jpg"
+  - name: Sambhav Jain
+    title: Vice Chairperson
+    avatar: "leads/sambhav.jpg"
+  - name: Gaurav Gupta
+    title: Treasurer
+    avatar: "leads/gaurav.jpg"
+  - name: Anubhav Pandey
+    title: Webmaster
+    avatar: "leads/anubhav.jpg"
+
+groups:
+  - name: Competitive Programming
+    leads:
+      - name: Harshit Minhas
+        avatar: "leads/harshit.jpg"
+      - name: Chetanya Mahana
+        avatar: "leads/chetanya.jpg"
+
+  - name: Artificial Intelligence
+    leads:
+      - name: Arnav Vikas Garg
+        avatar: "leads/arnav.jpg"
+      - name: Aaditya Sharma
+        avatar: "leads/aaditya.jpg"
+      - name: Hardik Ahuja
+        avatar: "leads/hardik.jpg"
+
+  - name: Development
+    leads:
+      - name: Kritika Jari
+        avatar: "leads/kritika.jpg"
+      - name: Harshul Arora
+        avatar: "leads/harshul.jpg"
+
+  - name: Open Source
+    leads:
+      - name: Raghav Sharma
+        avatar: "leads/raghav.jpg"
+
+  - name: Cyber-Security
+    leads:
+    - name: Aryan
+      avatar: "leads/aryan.jpg"
+    - name: Keshav Arora
+      avatar: "leads/keshav.jpg"
+
+  - name: Socials
+    leads:
+      - name: Prasuk Jain
+        avatar: "leads/prasuk.jpg"
+      - name: Shreya Pahuja
+        avatar: "leads/shreya.jpg"
+
+  - name: Women In Tech
+    leads:
+      - name: Akanksha Narula
+        avatar: "leads/akanksha.jpg"
+      - name: Vanshika Garg
+        avatar: "leads/vanshika.jpg"
