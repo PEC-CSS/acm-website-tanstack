@@ -10,6 +10,7 @@
  * */
 import z from "zod";
 import { resolveStaticImg } from "$lib/utils";
+import TEAM from "./team.yaml";
 
 const MemberSchema = z.object({
   name: z.string(),
@@ -30,4 +31,5 @@ const TeamSchema = z.object({
   groups: z.array(GroupSchema),
 });
 
+export const TEAM_DATA = TeamSchema.parse(TEAM);
 export type TeamData = z.infer<typeof TeamSchema>;
