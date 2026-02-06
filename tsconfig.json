@@ -22,7 +22,9 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
+      "$assets": ["./src/lib/assets/*"],
       "$components/*": ["./src/components/*"],
+      "$data": ["./src/data/index.ts"],
       "$data/*": ["./src/data/*"],
       "$env/*": ["./src/lib/env/*"],
       "$emails/*": ["./src/emails/*"],
