@@ -9,7 +9,10 @@
  * Yeah, it's a bit more setup, but the DX improvement is totally worth it.
  * */
 import z from "zod";
+
 import { resolveStaticImg } from "$lib/utils";
+
+import SOCIALS from "./socials.yaml";
 import TEAM from "./team.yaml";
 
 const MemberSchema = z.object({
@@ -31,5 +34,15 @@ const TeamSchema = z.object({
   groups: z.array(GroupSchema),
 });
 
+const SocialsSchema = z.array(
+  z.object({
+    platform: z.string(),
+    url: z.url(),
+  }),
+);
+
 export const TEAM_DATA = TeamSchema.parse(TEAM);
-export type TeamData = z.infer<typeof TeamSchema>;
+export type TTeamData = z.infer<typeof TeamSchema>;
+
+export const SOCIALS_DATA = SocialsSchema.parse(SOCIALS);
+export type TSocialsData = z.infer<typeof SocialsSchema>;
