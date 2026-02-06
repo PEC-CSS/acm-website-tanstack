@@ -267,6 +267,7 @@ interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
 ```
 
 ## TypeScript Guidelines
+- Prefix `interface` with `I` and `type` with `T`
 - Prefer `interface` for object shapes that may be extended
 - Prefer `type` for unions, intersections, and primitives
 - Avoid `any`; use `unknown` when type is truly unknown
@@ -275,18 +276,18 @@ interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
 ### Examples
 ```tsx
 // Good - Interface for extendable objects
-interface User {
+interface IUser {
   id: string;
   name: string;
 }
 
-interface Admin extends User {
+interface IAdmin extends IUser {
   permissions: string[];
 }
 
 // Good - Type for unions and primitives
-type Status = 'pending' | 'active' | 'inactive';
-type ID = string | number;
+type TStatus = 'pending' | 'active' | 'inactive';
+type TID = string | number;
 
 // Good - Generic with descriptive name
 function fetchData<TResponse>(url: string): Promise<TResponse> {
