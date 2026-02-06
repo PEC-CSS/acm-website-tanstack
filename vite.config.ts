@@ -1,4 +1,5 @@
 import netlify from "@netlify/vite-plugin-tanstack-start";
+import yaml from "@rollup/plugin-yaml";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
@@ -9,6 +10,7 @@ export default defineConfig({
   plugins: [
     devtools(),
     netlify(),
+    yaml(),
     tanstackStart(),
     viteReact({
       babel: {
