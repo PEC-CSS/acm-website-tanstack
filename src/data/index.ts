@@ -15,9 +15,15 @@ import { resolveStaticImg } from "$lib/utils";
 import SOCIALS from "./socials.yaml";
 import TEAM from "./team.yaml";
 
+const LinkSchema = z.object({
+  platform: z.string(),
+  url: z.url(),
+});
+
 const MemberSchema = z.object({
   name: z.string(),
   avatar: z.string().transform(av => resolveStaticImg(av)),
+  links: z.array(LinkSchema).default([]),
 });
 
 const CoreMemberSchema = MemberSchema.extend({
