@@ -1,20 +1,49 @@
+interface IImageMetadata {
+  format: string;
+  width: number;
+  height: number;
+  space: string;
+  channels: number;
+  depth: string;
+  isProgressive: boolean;
+  isPalette: boolean;
+  hasProfile: boolean;
+  hasAlpha: boolean;
+  autoOrient: {
+    width: number;
+    height: number;
+  };
+  src: string;
+}
+
 const allImages = import.meta.glob("/src/lib/assets/images/**/*", {
   eager: true,
   import: "default",
-}) as Record<string, string>;
+  query: {
+    format: "webp",
+    as: "metadata",
+  },
+}) as Record<string, IImageMetadata>;
 
-export function resolveStaticImg(path: string): string {
+export function resolveStaticImg(path: string) {
   const fullPath = path.startsWith("$assets/images/")
     ? path.replace("$assets/images/", "src/lib/assets/images/")
     : path.startsWith("/src")
       ? path
       : `/src/lib/assets/images/${path}`;
 
+  console.log(JSON.stringify(Object.values(allImages), null, 2));
+
   const resolved = allImages[fullPath];
 
-  if (!resolved || typeof resolved !== "string") {
+  if (!resolved) {
     throw new Error(`Image asset not found: ${path}`);
   }
 
-  return resolved;
+  return {
+    width: resolved.width,
+    height: resolved.height,
+    format: resolved.format,
+    src: resolved.src,
+  };
 }
