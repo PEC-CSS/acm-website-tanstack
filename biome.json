@@ -22,11 +22,45 @@
     "indentWidth": 2,
     "attributePosition": "multiline"
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              { "type": true, "source": ["**"] },
+              ":BLANK_LINE:",
+              [":URL:", ":PACKAGE_WITH_PROTOCOL:"],
+              ":BLANK_LINE:",
+              ":NODE:",
+              ":BUN:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              "$assets/**",
+              ":BLANK_LINE:",
+              "$components/**",
+              ":BLANK_LINE:",
+              "$data/**",
+              ":BLANK_LINE:",
+              "$hooks/**",
+              ":BLANK_LINE:",
+              "$lib/**",
+              ":BLANK_LINE:",
+              "$styles/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      }
     }
   },
   "javascript": {
