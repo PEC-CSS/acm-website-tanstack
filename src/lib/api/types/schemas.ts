@@ -1,4 +1,5 @@
 import z from "zod";
+
 import { ACM_BRANCHES, DESIGNATIONS } from "$lib/constants/org";
 
 export const BranchEnum = z.enum(ACM_BRANCHES);
@@ -24,6 +25,16 @@ export const APIUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
+});
+
+export const AuthenticatedUserSchema = z.object({
+  token: z.string(),
+  user: UserSchema,
+});
+
+export const APILoginResponseSchema = z.object({
+  jwtToken: z.string(),
+  user: APIUserSchema,
 });
 
 export const BaseEventSchema = z.object({

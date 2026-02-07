@@ -3,27 +3,22 @@ import Elysia from "elysia";
 import nodemailer from "nodemailer";
 import z from "zod";
 
-import VerifyEmail from "$emails/verify";
 import { API_URL } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/org";
+
+import VerifyEmail from "$emails/verify";
 import env from "$env/server";
 import { isErrorResponse } from "../types";
-import { APIUserSchema, UserSchema } from "../types/schemas";
+import {
+  APILoginResponseSchema,
+  AuthenticatedUserSchema,
+} from "../types/schemas";
 import {
   createErrorResponse,
   createResponseSchema,
   toSuccessResponse,
 } from "../utils/helpers";
-
-const LoginResponseSchema = z.object({
-  token: z.string(),
-  user: UserSchema,
-});
-
-const APILoginResponseSchema = z.object({
-  jwtToken: z.string(),
-  user: APIUserSchema,
-});
+import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/auth" })
   .model({
@@ -71,7 +66,7 @@ export const api = new Elysia({ prefix: "/auth" })
         email: z.email("you need to enter a email to login"),
         password: z.string("you need to enter a password to login"),
       }),
-      response: createResponseSchema(LoginResponseSchema, {
+      response: createResponseSchema(AuthenticatedUserSchema, {
         errorCodes: [401, 404, 500],
       }),
       detail: {
@@ -112,7 +107,6 @@ On successful authentication, returns a JWT token for subsequent authenticated r
         }
       }
 
-      // TODO: It's more ideal to redirect the user to confirmation page, instead of showing a bland json response.
       return toSuccessResponse({
         message: "Your Email was sucessfully verified.",
       });
