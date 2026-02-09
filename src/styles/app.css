@@ -1,9 +1,31 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: hsl(220 40% 20%);
+  --color-primary-light: color-mix(in srgb, var(--color-primary), white 30%);
+  --color-primary-dark: color-mix(in srgb, var(--color-primary), black 20%);
+
+  --color-accent: hsl(212 100% 50%);
+  --color-accent-light: color-mix(in srgb, var(--color-accent), white 30%);
+  --color-accent-dark: color-mix(in srgb, var(--color-accent), black 20%);
+
+  --color-bg: color-mix(in srgb, var(--color-primary), white 97%);
+  --color-bg-dark: color-mix(in srgb, var(--color-primary), white 90%);
+  --color-bg-hover: color-mix(in srgb, var(--color-primary), white 92%);
+  --color-border: color-mix(
+    in srgb,
+    var(--color-primary),
+    var(--color-white) 80%
+  );
+  --color-text: var(--color-primary);
+  --color-text-muted: color-mix(in srgb, var(--color-primary), white 40%);
+}
+
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
