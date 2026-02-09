@@ -18,6 +18,7 @@
   "dependencies": {
     "@elysiajs/eden": "^1.4.5",
     "@elysiajs/openapi": "^1.4.11",
+    "@fontsource/space-grotesk": "^5.2.10",
     "@netlify/vite-plugin-tanstack-start": "^1.0.2",
     "@react-email/components": "1.0.2",
     "@t3-oss/env-core": "^0.13.8",
