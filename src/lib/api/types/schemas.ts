@@ -1,9 +1,9 @@
 import z from "zod";
-import { ACM_BRANCHES, DESIGNATIONS } from "$lib/constants/org";
+
+import { ACM_BRANCHES } from "$lib/constants/org";
+import { DesignationEnum } from "$lib/types";
 
 export const BranchEnum = z.enum(ACM_BRANCHES);
-
-export const DesignationEnum = z.enum(DESIGNATIONS);
 
 export const BaseUserSchema = z.object({
   id: z.number(),
@@ -24,6 +24,16 @@ export const APIUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
+});
+
+export const AuthenticatedUserSchema = z.object({
+  token: z.string(),
+  user: UserSchema,
+});
+
+export const APILoginResponseSchema = z.object({
+  jwtToken: z.string(),
+  user: APIUserSchema,
 });
 
 // everything can be made optional to support =>

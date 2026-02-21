@@ -1,6 +1,7 @@
+import type { APIErrorResponse, ErrorStatusCode } from "../types";
+
 import { StatusMap, status } from "elysia";
 import z from "zod";
-import type { APIErrorResponse, ErrorStatusCode } from "../types";
 
 /**
  * Creates a standardized error response object from an API error payload.

@@ -1,10 +1,13 @@
+import "dotenv/config";
+
 import { defineConfig } from 'vite'
 import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+import tailwind from "@tailwindcss/vite";
 import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
-import sass from "vite-plugin-sass";
 import netlify from '@netlify/vite-plugin-tanstack-start'
+
 
 const config = defineConfig({
   plugins: [
@@ -14,7 +17,7 @@ const config = defineConfig({
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
-    sass(),
+    tailwind(),
     tanstackStart(),
     viteReact({
       babel: {
@@ -22,6 +25,9 @@ const config = defineConfig({
       },
     }),
   ],
+  server: {
+    port: 3000,
+  }
 })
 
 export default config
