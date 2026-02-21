@@ -12,6 +12,7 @@ import z from "zod";
 
 import { resolveStaticImg } from "$lib/utils";
 
+import DEVS from "./devs.yaml";
 import SOCIALS from "./socials.yaml";
 import TEAM from "./team.yaml";
 
@@ -46,6 +47,27 @@ const SocialsSchema = z.array(
     url: z.url(),
   }),
 );
+
+const RoleEnum = z.enum([
+  "Project Lead",
+  "Co-Lead",
+  "Backend",
+  "Frontend",
+  "Documentation",
+]);
+
+const DevSchema = z.array(
+  MemberSchema.extend({
+    avatar: z
+      .string()
+      .transform(av => resolveStaticImg(av))
+      .optional(),
+    roles: z.array(RoleEnum),
+  }),
+);
+
+export const DEV_DATA = DevSchema.parse(DEVS);
+export type TDevData = z.infer<typeof DevSchema>;
 
 export const TEAM_DATA = TeamSchema.parse(TEAM);
 export type TTeamData = z.infer<typeof TeamSchema>;
