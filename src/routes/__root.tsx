@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import { fetchUserFn } from "$lib/server/fns";
+
 import appCss from "$styles/app.css?url";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 
@@ -40,8 +42,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
-
+  beforeLoad: async () => {
+    const user = await fetchUserFn();
+    return { user };
+  },
   shellComponent: RootDocument,
+  notFoundComponent: () => <div>Not Found</div>,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -50,7 +56,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-screen bg-bg text-text">
         {children}
         <TanStackDevtools
           config={{
