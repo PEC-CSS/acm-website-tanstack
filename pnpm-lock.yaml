@@ -7150,6 +7150,143 @@ snapshots:
     dependencies:
       react: 19.2.0
 
+  '@react-email/body@0.2.0(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/button@0.2.0(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/code-block@0.2.0(react@19.2.0)':
+    dependencies:
+      prismjs: 1.30.0
+      react: 19.2.0
+
+  '@react-email/code-inline@0.0.5(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/column@0.0.13(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/components@1.0.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@react-email/body': 0.2.0(react@19.2.0)
+      '@react-email/button': 0.2.0(react@19.2.0)
+      '@react-email/code-block': 0.2.0(react@19.2.0)
+      '@react-email/code-inline': 0.0.5(react@19.2.0)
+      '@react-email/column': 0.0.13(react@19.2.0)
+      '@react-email/container': 0.0.15(react@19.2.0)
+      '@react-email/font': 0.0.9(react@19.2.0)
+      '@react-email/head': 0.0.12(react@19.2.0)
+      '@react-email/heading': 0.0.15(react@19.2.0)
+      '@react-email/hr': 0.0.11(react@19.2.0)
+      '@react-email/html': 0.0.11(react@19.2.0)
+      '@react-email/img': 0.0.11(react@19.2.0)
+      '@react-email/link': 0.0.12(react@19.2.0)
+      '@react-email/markdown': 0.0.17(react@19.2.0)
+      '@react-email/preview': 0.0.13(react@19.2.0)
+      '@react-email/render': 2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@react-email/row': 0.0.12(react@19.2.0)
+      '@react-email/section': 0.0.16(react@19.2.0)
+      '@react-email/tailwind': 2.0.2(@react-email/body@0.2.0(react@19.2.0))(@react-email/button@0.2.0(react@19.2.0))(@react-email/code-block@0.2.0(react@19.2.0))(@react-email/code-inline@0.0.5(react@19.2.0))(@react-email/container@0.0.15(react@19.2.0))(@react-email/heading@0.0.15(react@19.2.0))(@react-email/hr@0.0.11(react@19.2.0))(@react-email/img@0.0.11(react@19.2.0))(@react-email/link@0.0.12(react@19.2.0))(@react-email/preview@0.0.13(react@19.2.0))(@react-email/text@0.1.5(react@19.2.0))(react@19.2.0)
+      '@react-email/text': 0.1.5(react@19.2.0)
+      react: 19.2.0
+    transitivePeerDependencies:
+      - react-dom
+
+  '@react-email/container@0.0.15(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/font@0.0.9(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/head@0.0.12(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/heading@0.0.15(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/hr@0.0.11(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/html@0.0.11(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/img@0.0.11(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/link@0.0.12(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/markdown@0.0.17(react@19.2.0)':
+    dependencies:
+      marked: 15.0.12
+      react: 19.2.0
+
+  '@react-email/preview-server@5.1.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.94.0)':
+    dependencies:
+      next: 16.0.10(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.94.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@opentelemetry/api'
+      - '@playwright/test'
+      - babel-plugin-macros
+      - babel-plugin-react-compiler
+      - react
+      - react-dom
+      - sass
+
+  '@react-email/preview@0.0.13(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/render@2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      html-to-text: 9.0.5
+      prettier: 3.6.2
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  '@react-email/row@0.0.12(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/section@0.0.16(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
+  '@react-email/tailwind@2.0.2(@react-email/body@0.2.0(react@19.2.0))(@react-email/button@0.2.0(react@19.2.0))(@react-email/code-block@0.2.0(react@19.2.0))(@react-email/code-inline@0.0.5(react@19.2.0))(@react-email/container@0.0.15(react@19.2.0))(@react-email/heading@0.0.15(react@19.2.0))(@react-email/hr@0.0.11(react@19.2.0))(@react-email/img@0.0.11(react@19.2.0))(@react-email/link@0.0.12(react@19.2.0))(@react-email/preview@0.0.13(react@19.2.0))(@react-email/text@0.1.5(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@react-email/text': 0.1.5(react@19.2.0)
+      react: 19.2.0
+      tailwindcss: 4.1.18
+    optionalDependencies:
+      '@react-email/body': 0.2.0(react@19.2.0)
+      '@react-email/button': 0.2.0(react@19.2.0)
+      '@react-email/code-block': 0.2.0(react@19.2.0)
+      '@react-email/code-inline': 0.0.5(react@19.2.0)
+      '@react-email/container': 0.0.15(react@19.2.0)
+      '@react-email/heading': 0.0.15(react@19.2.0)
+      '@react-email/hr': 0.0.11(react@19.2.0)
+      '@react-email/img': 0.0.11(react@19.2.0)
+      '@react-email/link': 0.0.12(react@19.2.0)
+      '@react-email/preview': 0.0.13(react@19.2.0)
+
+  '@react-email/text@0.1.5(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+
   '@rolldown/pluginutils@1.0.0-beta.40': {}
 
   '@rolldown/pluginutils@1.0.0-beta.47': {}
@@ -7227,6 +7364,278 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.53.2':
     optional: true
+
+  '@selderee/plugin-htmlparser2@0.11.0':
+    dependencies:
+      domhandler: 5.0.3
+      selderee: 0.11.0
+
+  '@sinclair/typebox@0.34.41': {}
+
+  '@smithy/abort-controller@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/config-resolver@4.4.5':
+    dependencies:
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-config-provider': 4.2.0
+      '@smithy/util-endpoints': 3.2.7
+      '@smithy/util-middleware': 4.2.7
+      tslib: 2.8.1
+
+  '@smithy/core@3.20.0':
+    dependencies:
+      '@smithy/middleware-serde': 4.2.8
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-base64': 4.3.0
+      '@smithy/util-body-length-browser': 4.2.0
+      '@smithy/util-middleware': 4.2.7
+      '@smithy/util-stream': 4.5.8
+      '@smithy/util-utf8': 4.2.0
+      '@smithy/uuid': 1.1.0
+      tslib: 2.8.1
+
+  '@smithy/credential-provider-imds@4.2.7':
+    dependencies:
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/property-provider': 4.2.7
+      '@smithy/types': 4.11.0
+      '@smithy/url-parser': 4.2.7
+      tslib: 2.8.1
+
+  '@smithy/fetch-http-handler@5.3.8':
+    dependencies:
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/querystring-builder': 4.2.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-base64': 4.3.0
+      tslib: 2.8.1
+
+  '@smithy/hash-node@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      '@smithy/util-buffer-from': 4.2.0
+      '@smithy/util-utf8': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/invalid-dependency@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/is-array-buffer@2.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/is-array-buffer@4.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/middleware-content-length@4.2.7':
+    dependencies:
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/middleware-endpoint@4.4.1':
+    dependencies:
+      '@smithy/core': 3.20.0
+      '@smithy/middleware-serde': 4.2.8
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/shared-ini-file-loader': 4.4.2
+      '@smithy/types': 4.11.0
+      '@smithy/url-parser': 4.2.7
+      '@smithy/util-middleware': 4.2.7
+      tslib: 2.8.1
+
+  '@smithy/middleware-retry@4.4.17':
+    dependencies:
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/service-error-classification': 4.2.7
+      '@smithy/smithy-client': 4.10.2
+      '@smithy/types': 4.11.0
+      '@smithy/util-middleware': 4.2.7
+      '@smithy/util-retry': 4.2.7
+      '@smithy/uuid': 1.1.0
+      tslib: 2.8.1
+
+  '@smithy/middleware-serde@4.2.8':
+    dependencies:
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/middleware-stack@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/node-config-provider@4.3.7':
+    dependencies:
+      '@smithy/property-provider': 4.2.7
+      '@smithy/shared-ini-file-loader': 4.4.2
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/node-http-handler@4.4.7':
+    dependencies:
+      '@smithy/abort-controller': 4.2.7
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/querystring-builder': 4.2.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/property-provider@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/protocol-http@5.3.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/querystring-builder@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      '@smithy/util-uri-escape': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/querystring-parser@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/service-error-classification@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+
+  '@smithy/shared-ini-file-loader@4.4.2':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/signature-v4@5.3.7':
+    dependencies:
+      '@smithy/is-array-buffer': 4.2.0
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-hex-encoding': 4.2.0
+      '@smithy/util-middleware': 4.2.7
+      '@smithy/util-uri-escape': 4.2.0
+      '@smithy/util-utf8': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/smithy-client@4.10.2':
+    dependencies:
+      '@smithy/core': 3.20.0
+      '@smithy/middleware-endpoint': 4.4.1
+      '@smithy/middleware-stack': 4.2.7
+      '@smithy/protocol-http': 5.3.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-stream': 4.5.8
+      tslib: 2.8.1
+
+  '@smithy/types@4.11.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/url-parser@4.2.7':
+    dependencies:
+      '@smithy/querystring-parser': 4.2.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-base64@4.3.0':
+    dependencies:
+      '@smithy/util-buffer-from': 4.2.0
+      '@smithy/util-utf8': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/util-body-length-browser@4.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/util-body-length-node@4.2.1':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/util-buffer-from@2.2.0':
+    dependencies:
+      '@smithy/is-array-buffer': 2.2.0
+      tslib: 2.8.1
+
+  '@smithy/util-buffer-from@4.2.0':
+    dependencies:
+      '@smithy/is-array-buffer': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/util-config-provider@4.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/util-defaults-mode-browser@4.3.16':
+    dependencies:
+      '@smithy/property-provider': 4.2.7
+      '@smithy/smithy-client': 4.10.2
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-defaults-mode-node@4.2.19':
+    dependencies:
+      '@smithy/config-resolver': 4.4.5
+      '@smithy/credential-provider-imds': 4.2.7
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/property-provider': 4.2.7
+      '@smithy/smithy-client': 4.10.2
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-endpoints@3.2.7':
+    dependencies:
+      '@smithy/node-config-provider': 4.3.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-hex-encoding@4.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/util-middleware@4.2.7':
+    dependencies:
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-retry@4.2.7':
+    dependencies:
+      '@smithy/service-error-classification': 4.2.7
+      '@smithy/types': 4.11.0
+      tslib: 2.8.1
+
+  '@smithy/util-stream@4.5.8':
+    dependencies:
+      '@smithy/fetch-http-handler': 5.3.8
+      '@smithy/node-http-handler': 4.4.7
+      '@smithy/types': 4.11.0
+      '@smithy/util-base64': 4.3.0
+      '@smithy/util-buffer-from': 4.2.0
+      '@smithy/util-hex-encoding': 4.2.0
+      '@smithy/util-utf8': 4.2.0
+      tslib: 2.8.1
+
+  '@smithy/util-uri-escape@4.2.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@smithy/util-utf8@2.3.0':
+    dependencies:
+      '@smithy/util-buffer-from': 2.2.0
+      tslib: 2.8.1
 
   '@selderee/plugin-htmlparser2@0.11.0':
     dependencies:
@@ -8746,6 +9155,16 @@ snapshots:
       whatwg-url: 15.1.0
 
   dateformat@4.6.3: {}
+
+  debounce-fn@6.0.0:
+    dependencies:
+      mimic-function: 5.0.1
+
+  debounce@2.2.0: {}
+
+  debug@4.3.7:
+    dependencies:
+      ms: 2.1.3
 
   debounce-fn@6.0.0:
     dependencies:

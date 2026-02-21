@@ -11,7 +11,6 @@ const env = createEnv({
       .pipe(z.number()),
     SMTP_EMAIL: z.email(),
     SMTP_PASS: z.string(),
-    SESSION_SECRET: z.string().min(32),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
