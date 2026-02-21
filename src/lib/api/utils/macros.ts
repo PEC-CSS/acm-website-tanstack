@@ -1,13 +1,10 @@
-import type * as z from "zod";
 import type { Designation } from "$lib/types";
-import type { UserSchema } from "../types/schemas";
+import type { SessionUser } from "../types";
 
 import { Elysia, status } from "elysia";
 
 import { hasRole } from "$lib/types";
 import { decodeJWTPayload } from "$lib/utils";
-
-type SessionUser = z.infer<typeof UserSchema>;
 
 const unauthorized = (message: string) =>
   status(401, {
