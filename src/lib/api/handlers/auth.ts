@@ -5,6 +5,7 @@ import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/org";
+import { decodeJWTPayload } from "$lib/utils";
 
 import VerifyEmail from "$emails/verify";
 import env from "$env/server";
@@ -12,6 +13,7 @@ import { isErrorResponse } from "../types";
 import {
   APILoginResponseSchema,
   AuthenticatedUserSchema,
+  UserSchema,
 } from "../types/schemas";
 import {
   createErrorResponse,
@@ -21,6 +23,7 @@ import {
 import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/auth" })
+  .use(requireAuth)
   .model({
     error: z.object({
       success: z.literal(false),
@@ -31,7 +34,7 @@ export const api = new Elysia({ prefix: "/auth" })
   })
   .post(
     "/sign-in",
-    async ({ body, set }) => {
+    async ({ body, status, cookie: { session, user: userCookie } }) => {
       const res = await fetch(API_URL.V1.USER.LOGIN, {
         method: "POST",
         body: JSON.stringify(body),
@@ -48,17 +51,43 @@ export const api = new Elysia({ prefix: "/auth" })
         });
       }
 
-      const validatedRes = APILoginResponseSchema.parse(response);
+      const validated = APILoginResponseSchema.parse(response);
+      const claims = decodeJWTPayload(validated.jwtToken);
+      if (!claims)
+        return status(500, {
+          success: false,
+          error: "InternalServerError",
+          message: "Upstream returned invalid JWT",
+          timestamp: new Date().toISOString(),
+        });
 
-      set.headers.authorization = `Bearer ${validatedRes.jwtToken}`;
+      const cookieBase = {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        expires: new Date(claims.exp * 1000),
+      } as const;
+
+      session.set({ value: validated.jwtToken, ...cookieBase });
+
+      const userData = {
+        id: validated.user.id,
+        name: validated.user.name,
+        email: validated.user.email,
+        batch: validated.user.batch,
+        sid: validated.user.sid,
+        designation: validated.user.designation,
+        profile: validated.user.dp ?? null,
+        experience: validated.user.xp,
+        verified: validated.user.verified,
+      };
+
+      userCookie.set({ value: userData, ...cookieBase });
 
       return toSuccessResponse({
-        token: validatedRes.jwtToken,
-        user: {
-          ...validatedRes.user,
-          profile: validatedRes.user.dp,
-          experience: validatedRes.user.xp,
-        },
+        token: validated.jwtToken,
+        user: userData,
       });
     },
     {
@@ -84,6 +113,11 @@ On successful authentication, returns a JWT token for subsequent authenticated r
       },
     },
   )
+  .post("/sign-out", ({ cookie: { session, user } }) => {
+    session.remove();
+    user.remove();
+    return toSuccessResponse({ message: "Signed out successfully." });
+  })
   .get(
     "/verify-email/:token",
     async ({ params }) => {
@@ -238,4 +272,8 @@ The user must verify their email before logging in.
         tags: ["Authentication"],
       },
     },
-  );
+  )
+  .get("/me", async ({ user }) => toSuccessResponse(user), {
+    requireAuth: true,
+    response: createResponseSchema(UserSchema, { errorCodes: [401, 500] }),
+  });
