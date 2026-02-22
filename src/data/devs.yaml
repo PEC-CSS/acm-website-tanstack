@@ -19,7 +19,8 @@
       url: "https://www.linkedin.com/in/vidhi-sethi-013962319/"
     - platform: GitHub
       url: "https://github.com/vidhipec27"
-- name: Keshav Dham
+- name: Keshav Dham\
+  avatar: "devs/keshav.jpg" 
   roles:
     - Documentation
   links:
