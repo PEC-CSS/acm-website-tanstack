@@ -4,6 +4,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { deleteCookie, setCookie } from "@tanstack/react-start/server";
 import { getTreaty } from "src/routes/api.$";
 
+import { cookieBase } from "$lib/constants/api";
+import { decodeJWTPayload } from "$lib/utils";
+
 import { readSession } from "./session";
 
 export const fetchUserFn = createServerFn({ method: "GET" }).handler(
@@ -26,15 +29,12 @@ export const signinFn = createServerFn({ method: "POST" })
 
     if (error) return { error: error.value.message };
 
-    const cookieBase = {
-      httpOnly: true,
-      sameSite: "lax" as const,
-      path: "/",
-      secure: process.env.NODE_ENV === "production",
-    };
+    const claims = decodeJWTPayload(res.data.token);
 
-    setCookie("session", res.data.token, cookieBase);
-    setCookie("user", JSON.stringify(res.data.user), cookieBase);
+    if (!claims) return { error: "Invalid token received from server" };
+
+    setCookie("session", res.data.token, cookieBase(claims.exp));
+    setCookie("user", JSON.stringify(res.data.user), cookieBase(claims.exp));
 
     return { success: true };
   });

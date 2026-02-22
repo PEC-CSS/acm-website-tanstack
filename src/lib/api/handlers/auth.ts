@@ -3,7 +3,7 @@ import Elysia from "elysia";
 import nodemailer from "nodemailer";
 import z from "zod";
 
-import { API_URL } from "$lib/constants/api";
+import { API_URL, cookieBase } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/org";
 import { decodeJWTPayload } from "$lib/utils";
 
@@ -61,15 +61,7 @@ export const api = new Elysia({ prefix: "/auth" })
           timestamp: new Date().toISOString(),
         });
 
-      const cookieBase = {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        expires: new Date(claims.exp * 1000),
-      } as const;
-
-      session.set({ value: validated.jwtToken, ...cookieBase });
+      session.set({ value: validated.jwtToken, ...cookieBase(claims.exp) });
 
       const userData = {
         id: validated.user.id,
