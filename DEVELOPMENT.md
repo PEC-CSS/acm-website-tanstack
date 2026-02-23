@@ -13,8 +13,8 @@ The project uses [pnpm](https://pnpm.io/) for package management and scripts. Ma
 
 ## Prerequisites
 
-- `pnpm` - >v9.0.0
-- `node` - >v20.0.0
+- `pnpm` - >v10.0.0
+- `node` - >=v22.0.0 and <v23.0.0
 - `docker` - >v27.0.0
 
 ## Environment Variables

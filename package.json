@@ -1,7 +1,14 @@
 {
-  "name": "acm-website-tanstack",
+  "name": "@pec-css/website",
   "private": true,
   "type": "module",
+  "version": "0.1.0",
+  "homepage": "https://pecacm.in",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Savy011/acm-website-tanstack.git"
+  },
   "scripts": {
     "container:up": "docker compose up -d",
     "container:down": "docker compose down -v",
@@ -17,6 +24,11 @@
     "check:write": "biome check --write",
     "prepare": "husky",
     "email:dev": "email dev --dir=./src/emails --port=2999"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=22.0.0 <23.0.0",
+    "pnpm": ">=10.0.0"
   },
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.1.10",
