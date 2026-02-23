@@ -11,7 +11,6 @@
       "**/src/**/*",
       "**/.vscode/**/*",
       "**/index.html",
-      "**/vite.config.js",
       "!**/src/routeTree.gen.ts",
       "!**/src/styles.css"
     ]
@@ -29,7 +28,10 @@
           "level": "on",
           "options": {
             "groups": [
-              { "type": true, "source": ["**"] },
+              {
+                "type": true,
+                "source": ["**"]
+              },
               ":BLANK_LINE:",
               [":URL:", ":PACKAGE_WITH_PROTOCOL:"],
               ":BLANK_LINE:",

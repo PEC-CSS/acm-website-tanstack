@@ -7,7 +7,16 @@ import tailwind from "@tailwindcss/vite";
 import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import netlify from '@netlify/vite-plugin-tanstack-start'
+import { execSync } from "node:child_process";
+import pkg from "./package.json" with {type: "json"};
 
+function getCommitHash() {
+  try {
+    return execSync("git rev-parse --short HEAD").toString().trim()
+  } catch {
+    return "unknown";
+  }
+}
 
 const config = defineConfig({
   plugins: [
@@ -25,6 +34,10 @@ const config = defineConfig({
       },
     }),
   ],
+  define: {
+    "import.meta.env.COMMIT_HASH": JSON.stringify(getCommitHash()),
+    "import.meta.env.PKG_VERSION": JSON.stringify(pkg.version)
+  },
   server: {
     port: 3000,
   }
