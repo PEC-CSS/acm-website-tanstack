@@ -6,7 +6,7 @@ import { createIsomorphicFn } from "@tanstack/react-start";
 import { Elysia } from "elysia";
 import * as z from "zod";
 
-import { auth, events, user } from "$lib/api";
+import * as handlers from "$lib/api";
 
 const log = createPinoLogger({
   level: "debug",
@@ -69,10 +69,10 @@ All responses follow a consistent JSON structure with appropriate HTTP status co
       },
     }),
   )
-  .use(auth)
-  .use(user)
-  .use(events)
-  .get("/", "Hello PEC ACM!");
+  .use(handlers.auth)
+  .use(handlers.events)
+  .use(handlers.health)
+  .use(handlers.user);
 
 const handle = ({ request }: { request: Request }) => app.fetch(request);
 
