@@ -72,8 +72,8 @@ export const api = new Elysia({ prefix: "/events" })
       const url = `${API_URL.V1.EVENTS.GET_ALL}?${new URLSearchParams({
         ...(eventsFrom && { eventsFrom }),
         ...(eventsTill && { eventsTill }),
-        ...(offset !== undefined && { offset: offset.toString() }),
-        ...(pageSize !== undefined && { pageSize: pageSize.toString() }),
+        ...(offset !== undefined && { offset }),
+        ...(pageSize !== undefined && { pageSize }),
       })}`;
 
       const res = await fetch(url, { method: "GET" });
@@ -96,8 +96,8 @@ export const api = new Elysia({ prefix: "/events" })
       query: z.object({
         eventsFrom: z.string().optional(),
         eventsTill: z.string().optional(),
-        offset: z.number().optional(),
-        pageSize: z.number().optional(),
+        offset: z.string().optional(),
+        pageSize: z.string().optional(),
       }),
 
       response: createResponseSchema(EventsArraySchema, {
@@ -113,8 +113,8 @@ export const api = new Elysia({ prefix: "/events" })
 
       const url = `${API_URL.V1.EVENTS.USER(id)}?${new URLSearchParams({
         ...(role !== undefined && { role }),
-        ...(offset !== undefined && { offset: offset.toString() }),
-        ...(pageSize !== undefined && { pageSize: pageSize.toString() }),
+        ...(offset !== undefined && { offset }),
+        ...(pageSize !== undefined && { pageSize }),
       })}`;
 
       const res = await fetch(url, { method: "GET" });
@@ -138,8 +138,8 @@ export const api = new Elysia({ prefix: "/events" })
       }),
       query: z.object({
         role: z.string().optional(),
-        offset: z.number().optional(),
-        pageSize: z.number().optional(),
+        offset: z.string().optional(),
+        pageSize: z.string().optional(),
       }),
       response: createResponseSchema(EventUserSchema, {
         errorCodes: [401, 404, 500],
@@ -246,8 +246,8 @@ export const api = new Elysia({ prefix: "/events" })
 
       const url = `${API_URL.V1.EVENTS.BY_BRANCH(branch)}?${new URLSearchParams(
         {
-          ...(offset !== undefined && { offset: offset.toString() }),
-          ...(pageSize !== undefined && { pageSize: pageSize.toString() }),
+          ...(offset !== undefined && { offset }),
+          ...(pageSize !== undefined && { pageSize }),
         },
       )}`;
 
@@ -268,8 +268,8 @@ export const api = new Elysia({ prefix: "/events" })
         branch: z.enum(ACM_BRANCHES),
       }),
       query: z.object({
-        offset: z.number().optional(),
-        pageSize: z.number().optional(),
+        offset: z.string().optional(),
+        pageSize: z.string().optional(),
       }),
       response: createResponseSchema(EventsArraySchema, {
         errorCodes: [401, 404, 500],
@@ -449,15 +449,15 @@ export const api = new Elysia({ prefix: "/events" })
     },
   )
   .put(
-    "/update/:eventId",
+    "/:eventId",
     async ({ body, params, token }) => {
       const eventId = params.eventId;
 
-      // console.log("putting and updating!");
-      // console.log(eventId);
+      console.log("putting and updating!");
+      console.log(eventId);
 
       const url = `${API_URL.V1.EVENTS.BY_ID.UPDATE(eventId)}`;
-      console.log(url);
+      // console.log(url);
 
       const res = await fetch(url, {
         method: "PUT",
@@ -495,6 +495,85 @@ export const api = new Elysia({ prefix: "/events" })
         eventId: z.coerce.number(),
       }),
       response: createResponseSchema(BaseEventSchema, {
+        errorCodes: [401, 404, 500],
+      }),
+    },
+  )
+  .get(
+    "/search-events",
+    async ({ query }) => {
+      const {
+        eventsFrom,
+        eventsTill,
+        offset,
+        pageSize,
+        pattern,
+        branch,
+        ongoing,
+      } = query;
+
+      const currOffset =
+        offset === undefined || pageSize === undefined ? "0" : offset;
+      const currPageSize = pageSize === undefined ? "150" : pageSize;
+
+      const url = `${API_URL.V1.EVENTS.GET_ALL}?${new URLSearchParams({
+        ...{ offset: currOffset },
+        ...{ pageSize: currPageSize },
+      })}`;
+
+      const res = await fetch(url, { method: "GET" });
+
+      if (!res.ok) {
+        const response = await res.json();
+        console.log(response);
+        if (isErrorResponse(response)) {
+          return createErrorResponse(response, {
+            allowedCodes: [401, 404, 500],
+          });
+        }
+      }
+      const response = await res.json();
+      const validatedArray = EventsArraySchema.parse(response);
+
+      const fromDate = eventsFrom ? new Date(eventsFrom) : null;
+      const tillDate = eventsTill ? new Date(eventsTill) : null;
+
+      const resultArray = validatedArray?.filter(event => {
+        const eventStartDate = event.startDate
+          ? new Date(event.startDate)
+          : null;
+        const eventEndDate = event.endDate ? new Date(event.endDate) : null;
+
+        if (fromDate && eventStartDate && eventStartDate < fromDate)
+          return false;
+        else if (tillDate && eventEndDate && eventEndDate > tillDate)
+          return false;
+        else if (branch && event.branch !== branch) return false;
+        else if (ongoing && ongoing === "true" && event.ended === true)
+          return false;
+        else if (
+          pattern &&
+          !event.title?.toLowerCase().startsWith(pattern.toLowerCase())
+        )
+          return false;
+
+        return true;
+      });
+      const validatedRes = EventsArraySchema.parse(resultArray);
+      return toSuccessResponse(validatedRes);
+    },
+    {
+      query: z.object({
+        eventsFrom: z.string().optional(),
+        eventsTill: z.string().optional(),
+        offset: z.string().optional(),
+        pageSize: z.string().optional(),
+        pattern: z.string().optional(),
+        branch: z.enum(ACM_BRANCHES).optional(),
+        ongoing: z.string().optional(),
+      }),
+
+      response: createResponseSchema(EventsArraySchema, {
         errorCodes: [401, 404, 500],
       }),
     },
