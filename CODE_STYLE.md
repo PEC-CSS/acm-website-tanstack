@@ -1,14 +1,16 @@
 # PEC ACM Website Code Style and Formatting
 
-The PEC ACM Website codebase mainly uses [Biome](https://biomejs.dev/) for code formatting in order to quickly and automatically check for formatting (and sometimes logical) errors in code.
+The PEC ACM Website codebase mainly uses [Oxfmt](ihttps://oxc.rs/docs/guide/usage/formatter.html) for code formatting in order to quickly and automatically check for formatting (and sometimes logical) errors in code.
 
 The Project includes pnpm scripts for linting and formatting, in addition to pre-commit hooks with [husky](https://typicode.github.io/husky/). These scripts include:
 
 ```bash
-pnpm run format # Run the formatter on the project and write any changes to the filesystem, if applicable
-pnpm run format:check # Run the formatter on the project but don't write any changes to the filesystem
+pnpm run fmt # Run the formatter on the project and write any changes to the filesystem, if applicable
+pnpm run fmt:check # Run the formatter on the project but don't write any changes to the filesystem
 pnpm run lint # Run various checks on the project
-pnpm run check # Runs formatter, linter and import sorting on the project
+pnpm run lint:fix # Run various checks on the project and try auto-fixing them
+pnpm run check # Runs formatter, linter and import sorting on the project but don't write any changes to the filesystem
+pnpm run check # Runs formatter, linter and import sorting on the project and write any changes to the filesystem, if applicable
 ```
 
 The guiding principles of the code style and code formatting can be summarized as:
@@ -19,7 +21,7 @@ The guiding principles of the code style and code formatting can be summarized a
 - use the formatting of the file you're in, even if it breaks the rules
 - no nonsense
 
-It's worth noting that modern IDEs and text editors can run Biome automatically on save. It may be worth looking into whether this functionality is supported in your editor for a more convenient development workflow.
+It's worth noting that modern IDEs and text editors can run Oxlint automatically on save. It may be worth looking into whether this functionality is supported in your editor for a more convenient development workflow.
 
 ## Table of Contents
 
@@ -54,7 +56,7 @@ The following path aliases are configured to improve import statements and maint
 
 ## Formatting
 
-- Biome is enabled for formatting with the following settings:
+- Oxlint is enabled for formatting with the following settings:
   - **Indentation Style**: Spaces
   - **Indent Width**: 2 spaces
   - **Attribute Position**: Multiline

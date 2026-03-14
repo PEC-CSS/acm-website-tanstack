@@ -35,16 +35,17 @@ Database related variables can be omitted for the production environment (as the
 
 ## Available Scripts
 
-| Command             | Description                            |
-| ------------------- | -------------------------------------- |
-| `pnpm dev`          | Start development server               |
-| `pnpm build`        | Build for production                   |
-| `pnpm serve`        | Preview production build               |
-| `pnpm format`       | Run formatter                          |
-| `pnpm format:write` | Run formatter and fix issues           |
-| `pnpm lint`         | Run linting checks                     |
-| `pnpm check`        | Run all checks (format, lint, imports) |
-| `pnpm check:write`  | Run checks and fix issues              |
+| Command            | Description                            |
+| ------------------ | -------------------------------------- |
+| `pnpm dev`         | Start development server               |
+| `pnpm build`       | Build for production                   |
+| `pnpm serve`       | Preview production build               |
+| `pnpm fmt`         | Run formatter                          |
+| `pnpm fmt:write`   | Run formatter and fix issues           |
+| `pnpm lint`        | Run linting checks                     |
+| `pnpm lint:fix`    | Run linting checks and fix issues      |
+| `pnpm check`       | Run all checks (format, lint, imports) |
+| `pnpm check:write` | Run checks and fix issues              |
 
 ## Getting Started
 
@@ -117,11 +118,11 @@ The project includes path aliases for commonly used internal packages/libraries 
 
 ## Code Style
 
-This project uses Biome for formatting and linting. Pre-commit hooks are configured with Husky.
-You can install Biome's Extension for your code editor to show you linting hints and help you with formatting the files on save.
+This project uses Oxlint for formatting and linting. Pre-commit hooks are configured with Husky.
+You can install Oxlint's Extension for your code editor to show you linting hints and help you with formatting the files on save.
 
 See the [Available Scripts](#available-scripts) section for formatting and linting commands.
 
-Husky runs the `check` script on the staged files with the flag `--no-errors-on-unmatched` on the `pre-commit` event.
+Husky runs the `check` script on the `pre-commit` event.
 
 Read the full style guide: [CODE_STYLE.md](./CODE_STYLE.md)

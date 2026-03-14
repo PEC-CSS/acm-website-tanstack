@@ -52,11 +52,11 @@ src/
 
 - **Framework**: TanStack Start
 - **Language**: TypeScript
-- **Styling**: Sass (CSS Modules)
+- **Styling**: Tailwind CSS
 - **Routing**: TanStack Router
 - **Data Fetching**: TanStack Query
 - **Validation**: Zod
-- **Linting/Formatting**: Biome
+- **Linting/Formatting**: Oxc (Oxlint and Oxfmt)
 - **Package Manager**: pnpm
 
 ## Scripts
@@ -65,9 +65,10 @@ src/
 pnpm dev           # Start dev server
 pnpm build         # Build for production
 pnpm start         # Preview production build
-pnpm lint          # Run linter
-pnpm format        # Format code
-pnpm format:check  # Check formatting without writing
+pnpm lint          # Run linter without writing
+pnpm lint:fix      # Run linter
+pnpm fmt           # Format code
+pnpm fmt:check     # Check formatting without writing
 pnpm email:dev     # Start React Email dev server (port 2999)
 pnpm check         # Run all checks (format + lint)
 ```
