@@ -1,13 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "eslint",
-    "oxc",
-    "unicorn",
-    "react",
-    "typescript",
-    "import"
-  ],
+  "plugins": ["eslint", "oxc", "unicorn", "react", "typescript", "import"],
   "rules": {
     "eslint/prefer-const": "error",
     "typescript/no-explicit-any": "error",
@@ -18,10 +11,7 @@
         "fixStyle": "separate-type-imports"
       }
     ],
-    "typescript/consistent-type-definitions": [
-      "error",
-      "interface"
-    ],
+    "typescript/consistent-type-definitions": ["error", "interface"],
     "import/no-default-export": "error",
     "unicorn/filename-case": [
       "error",
@@ -32,10 +22,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "src/routes/**/*.ts",
-        "src/routes/**/*.tsx"
-      ],
+      "files": ["src/routes/**/*.ts", "src/routes/**/*.tsx"],
       "rules": {
         "import/no-default-export": "off"
       }
@@ -44,7 +31,5 @@
   "env": {
     "builtin": true
   },
-  "ignorePatterns": [
-    "src/routeTree.gen.ts"
-  ]
+  "ignorePatterns": ["src/routeTree.gen.ts"]
 }

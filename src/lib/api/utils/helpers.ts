@@ -1,6 +1,7 @@
+import type { APIErrorResponse, ErrorStatusCode } from "../types";
+
 import { StatusMap, status } from "elysia";
 import z from "zod";
-import type { APIErrorResponse, ErrorStatusCode } from "../types";
 
 /**
  * Creates a standardized error response object from an API error payload.
@@ -29,22 +30,16 @@ export function createErrorResponse<
 >(
   res: APIErrorResponse,
   options: {
-    customMessages?: Partial<
-      Record<(typeof StatusMap)[keyof typeof StatusMap], string>
-    >;
+    customMessages?: Partial<Record<(typeof StatusMap)[keyof typeof StatusMap], string>>;
     allowedCodes: AllowedCodes[];
   },
 ) {
   const statusCode =
-    StatusMap[res.code as keyof typeof StatusMap] ??
-    StatusMap["Internal Server Error"];
+    StatusMap[res.code as keyof typeof StatusMap] ?? StatusMap["Internal Server Error"];
 
-  const allowedCodes = options?.allowedCodes ?? [
-    StatusMap["Internal Server Error"],
-  ];
+  const allowedCodes = options?.allowedCodes ?? [StatusMap["Internal Server Error"]];
 
-  let finalStatusCode =
-    allowedCodes[allowedCodes.length - 1] ?? StatusMap["Internal Server Error"];
+  let finalStatusCode = allowedCodes[allowedCodes.length - 1] ?? StatusMap["Internal Server Error"];
 
   for (const code of allowedCodes) {
     if (code === statusCode) {
@@ -55,9 +50,7 @@ export function createErrorResponse<
 
   const customMessage = options?.customMessages?.[statusCode];
 
-  const message =
-    customMessage ??
-    "An unexpected error occurred while processing the request";
+  const message = customMessage ?? "An unexpected error occurred while processing the request";
   return status(finalStatusCode, {
     success: false,
     error: res.code,

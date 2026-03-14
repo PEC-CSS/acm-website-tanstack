@@ -17,9 +17,7 @@ interface VerifyEmailProps {
 }
 
 const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://pecacm.com"
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? "https://pecacm.com" : "http://localhost:3000";
 
 function VerifyEmail({ name, token }: VerifyEmailProps) {
   const VERIFY_URL = `${BASE_URL}/api/auth/verify-email/${token}`;
@@ -74,9 +72,8 @@ function VerifyEmail({ name, token }: VerifyEmailProps) {
             Hello {name}!
           </Heading>
           <Text>
-            You are receiving this email because you registered for PEC ACM.
-            Please click the button below to verify your email address and
-            complete your registration.
+            You are receiving this email because you registered for PEC ACM. Please click the button
+            below to verify your email address and complete your registration.
           </Text>
           <Button
             href={VERIFY_URL}
@@ -89,10 +86,7 @@ function VerifyEmail({ name, token }: VerifyEmailProps) {
           >
             Verify Email Address
           </Button>
-          <Text>
-            If you did not create an account with PEC ACM, no further action is
-            required.
-          </Text>
+          <Text>If you did not create an account with PEC ACM, no further action is required.</Text>
           <Text
             style={{
               paddingBottom: "0rem",
@@ -106,8 +100,8 @@ function VerifyEmail({ name, token }: VerifyEmailProps) {
           <Hr />
 
           <Text style={{ whiteSpace: "wrap" }}>
-            If you're having trouble clicking the "Verify Email Address" button,
-            copy and paste the URL below into your web browser:&nbsp;
+            If you're having trouble clicking the "Verify Email Address" button, copy and paste the
+            URL below into your web browser:&nbsp;
             <Link
               href={VERIFY_URL}
               style={{ whiteSpace: "collapse", textDecoration: "underline" }}
