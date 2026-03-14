@@ -5,7 +5,8 @@ import viteReact from '@vitejs/plugin-react'
 import sass from "vite-plugin-sass";
 import netlify from '@netlify/vite-plugin-tanstack-start'
 
-const config = defineConfig({
+// oxlint-disable-next-line import/no-default-export -- Vite requires default export for config files
+export default defineConfig({
   plugins: [
     devtools(),
     netlify(),
@@ -20,6 +21,4 @@ const config = defineConfig({
   resolve: {
     tsconfigPaths: true,
   }
-})
-
-export default config
+});

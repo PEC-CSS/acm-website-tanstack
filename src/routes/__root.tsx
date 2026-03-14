@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
+import { QueryDevtools } from "../integrations/tanstack-query/devtools";
 
 import appCss from "../styles.css?url";
 
@@ -61,7 +61,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               name: "Tanstack Router",
               render: <TanStackRouterDevtoolsPanel />,
             },
-            TanStackQueryDevtools,
+            QueryDevtools,
           ]}
         />
         <Scripts />

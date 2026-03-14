@@ -126,4 +126,5 @@ VerifyEmail.PreviewProps = {
   token: "b29eb4f0-9301-4390-bfec-9ab2fc4e91a6",
 } as VerifyEmailProps;
 
+// oxlint-disable-next-line import/no-default-export -- React Email requires default export for preview system and template discoverablility.
 export default VerifyEmail;
