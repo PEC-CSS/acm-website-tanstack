@@ -7,8 +7,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
-    "format": "biome format",
-    "format:write": "biome format --write",
+    "fmt:check": "oxfmt --check",
+    "fmt": "oxfmt",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "check": "biome check",
@@ -51,6 +51,8 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "husky": "^9.1.7",
     "jsdom": "^27.0.0",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.40.0",
     "oxlint": "^1.55.0",
     "react-email": "5.1.0",
     "sass": "^1.94.0",
@@ -59,5 +61,9 @@
     "vite-plugin-sass": "^0.1.0",
     "vitest": "^4.1.0",
     "web-vitals": "^5.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm run lint",
+    "*": "oxfmt --no-error-on-unmatched-pattern"
   }
 }

@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": false,
+  "arrowParens": "avoid",
+  "singleAttributePerLine": true,
+  "sortImports": {
+    "newlinesBetween": true,
+    "customGroups": [
+      {
+        "groupName": "assets",
+        "elementNamePattern": ["$assets/*"]
+      },
+      {
+        "groupName": "components",
+        "elementNamePattern": ["$components/*"]
+      },
+      {
+        "groupName": "data",
+        "elementNamePattern": ["$data", "$data/**"]
+      },
+      {
+        "groupName": "emails",
+        "elementNamePattern": ["$emails/**"]
+      },
+      {
+        "groupName": "env",
+        "elementNamePattern": ["$env/**"]
+      },
+      {
+        "groupName": "hooks",
+        "elementNamePattern": ["$hooks/*"]
+      },
+      {
+        "groupName": "lib",
+        "elementNamePattern": ["$lib/*"]
+      },
+      {
+        "groupName": "styles",
+        "elementNamePattern": ["$styles/*"]
+      }
+    ],
+    "internalPattern": ["$"],
+    "groups": [
+      "type-import",
+      "value-builtin",
+      "value-external",
+      "assets",
+      "components",
+      "data",
+      "hooks",
+      "styles",
+      "unknown"
+    ]
+  },
+  "ignorePatterns": ["src/routeTree.gen.ts"]
+}
