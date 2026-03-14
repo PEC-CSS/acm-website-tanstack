@@ -54,5 +54,6 @@
       "unknown"
     ]
   },
+  "sortPackageJson": true,
   "ignorePatterns": ["src/routeTree.gen.ts"]
 }
