@@ -3,11 +3,7 @@ import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
 import { isErrorResponse } from "../types";
-import {
-  createErrorResponse,
-  createResponseSchema,
-  toSuccessResponse,
-} from "../utils/helpers";
+import { createErrorResponse, createResponseSchema, toSuccessResponse } from "../utils/helpers";
 import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/user" })

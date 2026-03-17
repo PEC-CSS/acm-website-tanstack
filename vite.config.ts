@@ -1,27 +1,22 @@
-import { defineConfig } from 'vite'
-import { devtools } from '@tanstack/devtools-vite'
-import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-import viteReact from '@vitejs/plugin-react'
-import viteTsConfigPaths from 'vite-tsconfig-paths'
-import sass from "vite-plugin-sass";
-import netlify from '@netlify/vite-plugin-tanstack-start'
+import netlify from "@netlify/vite-plugin-tanstack-start";
+import { devtools } from "@tanstack/devtools-vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
-const config = defineConfig({
+// oxlint-disable-next-line import/no-default-export -- Vite requires default export for config files
+export default defineConfig({
   plugins: [
     devtools(),
     netlify(),
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
-    sass(),
     tanstackStart(),
     viteReact({
       babel: {
-        plugins: ['babel-plugin-react-compiler'],
+        plugins: ["babel-plugin-react-compiler"],
       },
     }),
   ],
-})
-
-export default config
+  resolve: {
+    tsconfigPaths: true,
+  },
+});

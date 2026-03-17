@@ -9,11 +9,7 @@ import { API_URL } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/org";
 import { isErrorResponse } from "../types";
 import { APIUserSchema, UserSchema } from "../types/schemas";
-import {
-  createErrorResponse,
-  createResponseSchema,
-  toSuccessResponse,
-} from "../utils/helpers";
+import { createErrorResponse, createResponseSchema, toSuccessResponse } from "../utils/helpers";
 
 const LoginResponseSchema = z.object({
   token: z.string(),
@@ -177,9 +173,7 @@ The token is sent to the user's registered email address during account registra
         },
       });
 
-      const html = await render(
-        VerifyEmail({ name: body.name, token: emailToken }),
-      );
+      const html = await render(VerifyEmail({ name: body.name, token: emailToken }));
       const text = toPlainText(html);
 
       await transporter.sendMail({
@@ -191,18 +185,13 @@ The token is sent to the user's registered email address during account registra
       });
 
       return toSuccessResponse({
-        message:
-          "Account created! Please check your email to verify your account",
+        message: "Account created! Please check your email to verify your account",
       });
     },
     {
       body: z
         .object({
-          name: z
-            .string()
-            .trim()
-            .min(1, "Name is required")
-            .max(100, "Name too long"),
+          name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
           email: z.email().endsWith("@pec.edu.in", {
             error: "We only accept '@pec.edu.in' emails.",
           }),
@@ -224,9 +213,7 @@ The token is sent to the user's registered email address during account registra
         }),
       response: createResponseSchema(
         z.object({
-          message: z.literal(
-            "Account created! Please check your email to verify your account",
-          ),
+          message: z.literal("Account created! Please check your email to verify your account"),
         }),
         { errorCodes: [400, 500] },
       ),

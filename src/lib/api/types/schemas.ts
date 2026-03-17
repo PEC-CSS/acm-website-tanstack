@@ -1,4 +1,5 @@
 import z from "zod";
+
 import { ACM_BRANCHES, DESIGNATIONS } from "$lib/constants/org";
 
 export const BranchEnum = z.enum(ACM_BRANCHES);

@@ -7,11 +7,12 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
-    "format": "biome format",
-    "format:write": "biome format --write",
-    "lint": "biome lint",
-    "check": "biome check",
-    "check:write": "biome check",
+    "fmt:check": "oxfmt --check",
+    "fmt": "oxfmt",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "check": "pnpm run fmt:check && pnpm run lint",
+    "check:write": "pnpm run fmt && pnpm run lint:fix",
     "prepare": "husky",
     "email:dev": "email dev --dir=./src/emails --port=2999"
   },
@@ -34,11 +35,9 @@
     "nodemailer": "^7.0.12",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "vite-tsconfig-paths": "^5.1.4",
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
     "@react-email/preview-server": "5.1.0",
     "@tanstack/devtools-vite": "^0.3.11",
     "@testing-library/dom": "^10.4.0",
@@ -47,16 +46,24 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^5.0.4",
+    "@typescript/native-preview": "7.0.0-dev.20260314.1",
+    "@vitejs/plugin-react": "^5.2.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "husky": "^9.1.7",
     "jsdom": "^27.0.0",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.40.0",
+    "oxlint": "^1.55.0",
+    "oxlint-tsgolint": "^0.16.0",
     "react-email": "5.1.0",
     "sass": "^1.94.0",
     "typescript": "^5.7.2",
-    "vite": "^7.1.7",
-    "vite-plugin-sass": "^0.1.0",
-    "vitest": "^3.0.5",
+    "vite": "^8.0.0",
+    "vitest": "^4.1.0",
     "web-vitals": "^5.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm run lint",
+    "*": "oxfmt --no-error-on-unmatched-pattern"
   }
 }
