@@ -10,8 +10,7 @@
  * */
 import z from "zod";
 
-import { resolveStaticImg } from "$lib/utils";
-
+import { resolveStaticImg, slugify } from "$lib/utils";
 import DEVS from "./devs.yaml";
 import SOCIALS from "./socials.yaml";
 import TEAM from "./team.yaml";
@@ -31,10 +30,15 @@ const CoreMemberSchema = MemberSchema.extend({
   title: z.string(),
 });
 
-const GroupSchema = z.object({
-  name: z.string(),
-  leads: z.array(MemberSchema),
-});
+const GroupSchema = z
+  .object({
+    name: z.string(),
+    leads: z.array(MemberSchema),
+  })
+  .transform(group => ({
+    ...group,
+    id: slugify(group.name),
+  }));
 
 const TeamSchema = z.object({
   core: z.array(CoreMemberSchema),
@@ -48,13 +52,7 @@ const SocialsSchema = z.array(
   }),
 );
 
-const RoleEnum = z.enum([
-  "Project Lead",
-  "Co-Lead",
-  "Backend",
-  "Frontend",
-  "Documentation",
-]);
+const RoleEnum = z.enum(["Project Lead", "Co-Lead", "Backend", "Frontend", "Documentation"]);
 
 const DevSchema = z.array(
   MemberSchema.extend({

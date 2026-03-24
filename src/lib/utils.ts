@@ -1,3 +1,12 @@
+export function slugify(str: string) {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 interface IImageMetadata {
   format: string;
   width: number;
@@ -31,8 +40,6 @@ export function resolveStaticImg(path: string) {
     : path.startsWith("/src")
       ? path
       : `/src/lib/assets/images/${path}`;
-
-  console.log(JSON.stringify(Object.values(allImages), null, 2));
 
   const resolved = allImages[fullPath];
 
