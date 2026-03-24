@@ -57,11 +57,9 @@
     "oxlint": "^1.55.0",
     "oxlint-tsgolint": "^0.17.3",
     "react-email": "5.2.10",
-    "sass": "^1.98.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vite-imagetools": "^9.0.2",
-    "vite-plugin-sass": "^0.1.0",
     "vitest": "^4.1.0",
     "web-vitals": "^5.1.0"
   },
