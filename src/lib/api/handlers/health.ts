@@ -7,10 +7,10 @@ const base = () => ({
   version: import.meta.env.PKG_VERSION,
   commit: import.meta.env.COMMIT_HASH,
   timestamp: new Date().toISOString(),
-  uptime: process.uptime(),
-  environment: (process.env.NODE_ENV ?? "development") as
-    | "production"
-    | "development",
+  uptime: `${Math.floor(process.uptime() / 60)}mins`,
+  environment: import.meta.env.DEV
+    ? ("development" as const)
+    : ("production" as const),
 });
 
 export const api = new Elysia({ prefix: "/health" }).get(
@@ -49,7 +49,7 @@ export const api = new Elysia({ prefix: "/health" }).get(
       version: z.string(),
       commit: z.string(),
       timestamp: z.iso.datetime(),
-      uptime: z.number(),
+      uptime: z.string(),
       environment: z.enum(["production", "development"]),
       upstream: z.object({
         status: z.enum(["ok", "unreachable"]),
