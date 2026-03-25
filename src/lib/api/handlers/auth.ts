@@ -75,7 +75,7 @@ export const api = new Elysia({ prefix: "/auth" })
         verified: validated.user.verified,
       };
 
-      userCookie.set({ value: userData, ...cookieBase });
+      userCookie.set({ value: userData, ...cookieBase(claims.exp) });
 
       return toSuccessResponse({
         token: validated.jwtToken,
