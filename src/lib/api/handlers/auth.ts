@@ -11,8 +11,8 @@ import VerifyEmail from "$emails/verify";
 import env from "$env/server";
 import { isErrorResponse } from "../types";
 import {
-  APILoginResponseSchema,
   AuthenticatedUserSchema,
+  UpstreamLoginResponseSchema,
   UserSchema,
 } from "../types/schemas";
 import {
@@ -51,7 +51,7 @@ export const api = new Elysia({ prefix: "/auth" })
         });
       }
 
-      const validated = APILoginResponseSchema.parse(response);
+      const validated = UpstreamLoginResponseSchema.parse(response);
       const claims = decodeJWTPayload(validated.jwtToken);
       if (!claims)
         return status(500, {

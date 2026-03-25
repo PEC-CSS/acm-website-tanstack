@@ -20,7 +20,7 @@ export const UserSchema = BaseUserSchema.extend({
   experience: z.number(),
 });
 
-export const APIUserSchema = BaseUserSchema.extend({
+export const UpstreamUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
@@ -31,9 +31,9 @@ export const AuthenticatedUserSchema = z.object({
   user: UserSchema,
 });
 
-export const APILoginResponseSchema = z.object({
+export const UpstreamLoginResponseSchema = z.object({
   jwtToken: z.string(),
-  user: APIUserSchema,
+  user: UpstreamUserSchema,
 });
 
 // everything can be made optional to support =>
