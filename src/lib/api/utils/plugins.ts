@@ -1,6 +1,7 @@
 import { openapi as createOpenAPI } from "@elysiajs/openapi";
 import { elysiaLogger } from "@logtape/elysia";
 import { configure, getConsoleSink } from "@logtape/logtape";
+import { prettyFormatter } from "@logtape/pretty";
 import * as z from "zod";
 
 let loggerConfigured = false;
@@ -9,7 +10,11 @@ export const configureLogger = async () => {
   if (loggerConfigured) return;
   await configure({
     reset: import.meta.env.DEV,
-    sinks: { console: getConsoleSink() },
+    sinks: {
+      console: getConsoleSink({
+        formatter: prettyFormatter,
+      }),
+    },
     loggers: [
       {
         category: ["logtape", "meta"],
