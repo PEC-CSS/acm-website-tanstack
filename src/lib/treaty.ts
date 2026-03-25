@@ -3,7 +3,8 @@ import type { App } from "src/routes/api.$";
 
 import { treaty } from "@elysiajs/eden";
 import { createIsomorphicFn } from "@tanstack/react-start";
-import { app } from "src/routes/api.$";
+
+import { app } from "~/routes/api.$";
 
 export const getTreaty = createIsomorphicFn()
   .server(() => reaty(app).api)
