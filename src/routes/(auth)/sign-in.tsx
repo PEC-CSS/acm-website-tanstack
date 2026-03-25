@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { signinFn } from "$lib/server/fns";
+import { signinFn } from "$lib/fns/auth";
 
 export const Route = createFileRoute("/(auth)/sign-in")({
   head: () => ({
@@ -37,7 +37,7 @@ function RouteComponent() {
     },
     onSubmit: async ({ value }) => {
       setServerError(null);
-      const result = await signinFn({ data: value });
+      const result = await signinFn(value.email, value.password);
 
       if (result.error) {
         setServerError(result.error);
