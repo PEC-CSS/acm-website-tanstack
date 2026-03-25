@@ -31,10 +31,11 @@
     "pnpm": ">=10.0.0"
   },
   "dependencies": {
-    "@bogeychan/elysia-logger": "^0.1.10",
     "@elysiajs/eden": "^1.4.5",
     "@elysiajs/openapi": "^1.4.11",
     "@fontsource/space-grotesk": "^5.2.10",
+    "@logtape/elysia": "^2.0.5",
+    "@logtape/logtape": "^2.0.5",
     "@netlify/vite-plugin-tanstack-start": "^1.0.2",
     "@react-email/components": "^1.0.2",
     "@t3-oss/env-core": "^0.13.8",
@@ -59,12 +60,11 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@tanstack/react-router-devtools": "^1.132.0",
-    "@tanstack/react-query-devtools": "^5.84.2",
-    "concurrently": "^9.2.1",
     "@biomejs/biome": "2.4.4",
     "@react-email/preview-server": "5.1.0",
     "@tanstack/devtools-vite": "^0.3.11",
+    "@tanstack/react-query-devtools": "^5.84.2",
+    "@tanstack/react-router-devtools": "^1.132.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.10.2",
@@ -73,6 +73,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
+    "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "jsdom": "^27.0.0",
     "react-email": "^5.1.0",
