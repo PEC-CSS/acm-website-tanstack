@@ -7,14 +7,14 @@ core:
         url: "https://www.linkedin.com/in/gurmehar-singh-87636425a/"
       - platform: GitHub
         url: "https://github.com/GURMEHAR-PEC"
-  - name: Sambhav Jain
+  - name: Anubhav Pandey
     title: Vice Chairperson
-    avatar: "leads/sambhav.jpg"
+    avatar: "leads/anubhav.jpg"
     links:
       - platform: LinkedIn
-        url: "https://www.linkedin.com/in/sambhav2j/"
+        url: "https://www.linkedin.com/in/anubhav3p/"
       - platform: GitHub
-        url: "https://github.com/SambhavJain74"
+        url: "https://github.com/Anubhavpandey27"
   - name: Gaurav Gupta
     title: Treasurer
     avatar: "leads/gaurav.jpg"
@@ -23,25 +23,25 @@ core:
         url: "https://www.linkedin.com/in/gaurav-gupta-7801a625b/"
       - platform: GitHub
         url: "https://github.com/GauravGupta993"
-  - name: Anubhav Pandey
+  - name: Harshul Arora
     title: Webmaster
-    avatar: "leads/anubhav.jpg"
+    avatar: "leads/harshul.jpg"
     links:
       - platform: LinkedIn
-        url: "https://www.linkedin.com/in/anubhav3p/"
+        url: "https://www.linkedin.com/in/harshul-arora-7a264b250/"
       - platform: GitHub
-        url: "https://github.com/Anubhavpandey27"
+        url: "https://github.com/harshxll"
 
 groups:
   - name: Competitive Programming
     leads:
-      - name: Harshit Minhas
-        avatar: "leads/harshit.jpg"
+      - name: Sambhav Jain
+        avatar: "leads/sambhav.jpg"
         links:
           - platform: LinkedIn
-            url: "https://www.linkedin.com/in/harshit-minhas-879026253/"
+            url: "https://www.linkedin.com/in/sambhav2j/"
           - platform: GitHub
-            url: "https://github.com/harshit-m007"
+            url: "https://github.com/SambhavJain74"
       - name: Chetanya Mahana
         avatar: "leads/chetanya.jpg"
         links:
@@ -81,13 +81,13 @@ groups:
             url: "https://www.linkedin.com/in/krittika-jari-676897268/"
           - platform: GitHub
             url: "https://github.com/krittika2004"
-      - name: Harshul Arora
-        avatar: "leads/harshul.jpg"
+      - name: Harshit Minhas
+        avatar: "leads/harshit.jpg"
         links:
           - platform: LinkedIn
-            url: "https://www.linkedin.com/in/harshul-arora-7a264b250/"
+            url: "https://www.linkedin.com/in/harshit-minhas-879026253/"
           - platform: GitHub
-            url: "https://github.com/harshxll"
+            url: "https://github.com/harshit-m007"
 
   - name: Open Source
     leads:
@@ -101,20 +101,20 @@ groups:
 
   - name: Cyber-Security
     leads:
-    - name: Aryan
-      avatar: "leads/aryan.jpg"
-      links:
-        - platform: LinkedIn
-          url: "https://www.linkedin.com/in/aryan1006/"
-        - platform: GitHub
-          url: "https://github.com/ary-a-n"
-    - name: Keshav Arora
-      avatar: "leads/keshav.jpg"
-      links:
-        - platform: LinkedIn
-          url: "https://www.linkedin.com/in/keshavarorapec/"
-        - platform: GitHub
-          url: "https://github.com/CoderOMaster"
+      - name: Aryan
+        avatar: "leads/aryan.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/aryan1006/"
+          - platform: GitHub
+            url: "https://github.com/ary-a-n"
+      - name: Keshav Arora
+        avatar: "leads/keshav.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/keshavarorapec/"
+          - platform: GitHub
+            url: "https://github.com/CoderOMaster"
 
   - name: Socials
     leads:
