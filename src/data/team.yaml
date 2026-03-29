@@ -7,6 +7,8 @@ core:
         url: "https://www.linkedin.com/in/gurmehar-singh-87636425a/"
       - platform: GitHub
         url: "https://github.com/GURMEHAR-PEC"
+      - platform: E-Mail
+        url: "mailto:gurmeharsingh.bt22cse@pec.edu.in"
   - name: Anubhav Pandey
     title: Vice Chairperson
     avatar: "leads/anubhav.jpg"
@@ -15,6 +17,8 @@ core:
         url: "https://www.linkedin.com/in/anubhav3p/"
       - platform: GitHub
         url: "https://github.com/Anubhavpandey27"
+      - platform: E-Mail
+        url: "mailto:anubhavpandey.bt22cseds@pec.edu.in"
   - name: Gaurav Gupta
     title: Treasurer
     avatar: "leads/gaurav.jpg"
@@ -23,6 +27,8 @@ core:
         url: "https://www.linkedin.com/in/gaurav-gupta-7801a625b/"
       - platform: GitHub
         url: "https://github.com/GauravGupta993"
+      - platform: E-Mail
+        url: "mailto:gauravgupta.bt22cse@pec.edu.in"
   - name: Harshul Arora
     title: Webmaster
     avatar: "leads/harshul.jpg"
@@ -31,6 +37,8 @@ core:
         url: "https://www.linkedin.com/in/harshul-arora-7a264b250/"
       - platform: GitHub
         url: "https://github.com/harshxll"
+      - platform: E-Mail
+        url: "mailto:harshul.bt22cse@pec.edu.in"
 
 groups:
   - name: Competitive Programming
