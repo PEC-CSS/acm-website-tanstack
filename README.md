@@ -8,19 +8,8 @@ The official website for PEC ACM.
 # Install dependencies
 pnpm install
 
-<<<<<<< vidhi/backendstuff
-Or
-
-``bash
-pnpm install
-pnpm dev
-``
-
-# Building For Production
-=======
 # Start development server
 pnpm dev
->>>>>>> main
 
 # Build for production
 pnpm build
