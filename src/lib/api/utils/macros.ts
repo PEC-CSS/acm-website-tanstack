@@ -25,9 +25,7 @@ const forbidden = (message: string) =>
 export const requireAuth = new Elysia({ name: "require-auth" }).macro({
   requireAuth: (enabled: true | Designation) => ({
     resolve({ headers, cookie: { session, user: userCookie } }) {
-      const token =
-        (session.value as string | undefined) ??
-        headers.authorization?.split(" ")[1];
+      const token = (session.value as string | undefined) ?? headers.authorization?.split(" ")[1];
 
       if (!token) return unauthorized("You need to be signed in.");
 

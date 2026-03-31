@@ -1,6 +1,8 @@
 import z from "zod";
 
-import { DESIGNATIONS } from "./constants/org";
+import { ACM_BRANCHES, DESIGNATIONS } from "./constants/org";
+
+export const BranchEnum = z.enum(ACM_BRANCHES);
 
 export type Designation = (typeof DESIGNATIONS)[number];
 

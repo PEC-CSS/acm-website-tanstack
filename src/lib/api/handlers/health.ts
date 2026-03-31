@@ -8,9 +8,7 @@ const base = () => ({
   commit: import.meta.env.COMMIT_HASH,
   timestamp: new Date().toISOString(),
   uptime: `${Math.floor(process.uptime() / 60)}mins`,
-  environment: import.meta.env.DEV
-    ? ("development" as const)
-    : ("production" as const),
+  environment: import.meta.env.DEV ? ("development" as const) : ("production" as const),
 });
 
 export const api = new Elysia({ prefix: "/health" }).get(

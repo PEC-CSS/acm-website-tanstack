@@ -1,7 +1,7 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-const env = createEnv({
+export const env = createEnv({
   server: {
     BACKEND_BASE_URL: z.url(),
     SMTP_HOST: z.string(),
@@ -15,5 +15,3 @@ const env = createEnv({
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
 });
-
-export default env;

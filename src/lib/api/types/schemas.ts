@@ -1,9 +1,6 @@
 import z from "zod";
 
-import { ACM_BRANCHES } from "$lib/constants/org";
-import { DesignationEnum } from "$lib/types";
-
-export const BranchEnum = z.enum(ACM_BRANCHES);
+import { BranchEnum, DesignationEnum } from "$lib/types";
 
 export const BaseUserSchema = z.object({
   id: z.number(),

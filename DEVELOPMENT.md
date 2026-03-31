@@ -22,34 +22,36 @@ The project uses [pnpm](https://pnpm.io/) for package management and scripts. Ma
 The Project requires the following set of Environmental variables for running in development environment.
 Database related variables can be omitted for the production environment (as the backend lives on a different service).
 
-|    Variable Name    |                 What It Does?                |            Example           |
-|:-------------------:|:--------------------------------------------:|:----------------------------:|
-|  `BACKEND_BASE_URL` |       URL where the backend is running       |   `http://localhost:8080`    |
-|     `SMTP_HOST`     | Host URL for connection to the E-Mail Server |     `smtp.ethereal.email`    |
-|     `SMTP_PORT`     |   Port for connection to the E-Mail Server   |              587             |
-|     `SMTP_EMAIL`    |         E-mail used for E-Mail Server        | `dummy.email@acm-pec.edu.in` |
-|     `SMTP_PASS`     |          Password for E-Mail Server          |    `AReally$tr0ngPa55w0rd`   |
-|    `POSTGRES_DB`    |    Database name for the Postgres Database   |             `acm`            |
-|   `POSTGRES_USER`   |      Username for the Postgres Database      |           `acmsecy`          |
-| `POSTGRES_PASSWORD` |      Password for the Postgres Database      |           `acmhead`          |
+|    Variable Name    |                What It Does?                 |           Example            |
+| :-----------------: | :------------------------------------------: | :--------------------------: |
+| `BACKEND_BASE_URL`  |       URL where the backend is running       |   `http://localhost:8080`    |
+|     `SMTP_HOST`     | Host URL for connection to the E-Mail Server |    `smtp.ethereal.email`     |
+|     `SMTP_PORT`     |   Port for connection to the E-Mail Server   |             587              |
+|    `SMTP_EMAIL`     |        E-mail used for E-Mail Server         | `dummy.email@acm-pec.edu.in` |
+|     `SMTP_PASS`     |          Password for E-Mail Server          |   `AReally$tr0ngPa55w0rd`    |
+|    `POSTGRES_DB`    |   Database name for the Postgres Database    |            `acm`             |
+|   `POSTGRES_USER`   |      Username for the Postgres Database      |          `acmsecy`           |
+| `POSTGRES_PASSWORD` |      Password for the Postgres Database      |          `acmhead`           |
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm serve` | Preview production build |
-| `pnpm format` | Run formatter |
-| `pnpm format:write` | Run formatter and fix issues |
-| `pnpm lint` | Run linting checks |
-| `pnpm check` | Run all checks (format, lint, imports) |
-| `pnpm check:write` | Run checks and fix issues |
+| Command            | Description                            |
+| ------------------ | -------------------------------------- |
+| `pnpm dev`         | Start development server               |
+| `pnpm build`       | Build for production                   |
+| `pnpm serve`       | Preview production build               |
+| `pnpm fmt`         | Run formatter                          |
+| `pnpm fmt:write`   | Run formatter and fix issues           |
+| `pnpm lint`        | Run linting checks                     |
+| `pnpm lint:fix`    | Run linting checks and fix issues      |
+| `pnpm check`       | Run all checks (format, lint, imports) |
+| `pnpm check:write` | Run checks and fix issues              |
 
 ## Getting Started
 
 1. Set Environment Variables
    - Copy the example `.env` file and update it with your values (see the [Environment Variables](#environment-variables) table above for details)
+
 ```sh
 cp .env.example .env
 ```
@@ -68,6 +70,7 @@ docker compose up -d
 
 > [!IMPORTANT]
 > Make sure to use the `-v` flag when destroying the container to remove volumes.
+>
 > ```sh
 > docker compose down -v
 > ```
@@ -75,11 +78,11 @@ docker compose up -d
 3. Verify Services Are Running
    - Backend: `http://localhost:8080`
    - PostgreSQL: `localhost:5432`
-   
+
    The database is pre-seeded with test data. Use these credentials:
    - Email: `harshpreetsinghjohar.btcse20@pec.edu.in`
    - Password: `admin123`
-   
+
 Check Docker logs if services fail to start:
 
 ```sh
@@ -93,7 +96,8 @@ pnpm install
 ```
 
 5. Run Dev Server
-  - The frontend dev server should now be running on port `3000`
+
+- The frontend dev server should now be running on port `3000`
 
 ```sh
 pnpm dev
@@ -101,7 +105,7 @@ pnpm dev
 
 ## Path Aliases
 
-The project includes path aliases for commonly used internal packages/libraries which *should* be used to avoid long import paths in the code. These are configured in the project typescript config `tsconfig.json`.
+The project includes path aliases for commonly used internal packages/libraries which _should_ be used to avoid long import paths in the code. These are configured in the project typescript config `tsconfig.json`.
 
 - `$components` → `src/components`
 - `$data` → `src/data`
@@ -114,11 +118,11 @@ The project includes path aliases for commonly used internal packages/libraries 
 
 ## Code Style
 
-This project uses Biome for formatting and linting. Pre-commit hooks are configured with Husky.
-You can install Biome's Extension for your code editor to show you linting hints and help you with formatting the files on save.
+This project uses Oxlint for formatting and linting. Pre-commit hooks are configured with Husky.
+You can install Oxlint's Extension for your code editor to show you linting hints and help you with formatting the files on save.
 
 See the [Available Scripts](#available-scripts) section for formatting and linting commands.
 
-Husky runs the `check` script on the staged files with the flag `--no-errors-on-unmatched` on the `pre-commit` event.
+Husky runs the `check` script on the `pre-commit` event.
 
 Read the full style guide: [CODE_STYLE.md](./CODE_STYLE.md)

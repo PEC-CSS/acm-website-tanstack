@@ -13,14 +13,7 @@ export const BRANCH_NAMES = [
   "PROD/META",
 ] as const;
 
-export const ACM_BRANCHES = [
-  "DEVELOPMENT",
-  "AI",
-  "CP",
-  "CYBER",
-  "SOCIALS",
-  "WIT",
-] as const;
+export const ACM_BRANCHES = ["DEVELOPMENT", "AI", "CP", "CYBER", "SOCIALS", "WIT"] as const;
 
 export const DESIGNATIONS = [
   "Member",

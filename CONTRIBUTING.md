@@ -8,6 +8,7 @@ In this guide you will get an overview of the contribution workflow from opening
 > We don't really care if you use LLMs/Coding Agents to **help** with your PRs (_keyword: help_), but we expect you to fully understand the code in your PR, as we might question some design decision while reviewing the PR.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
 - [How to Contribute](#how-to-contribute)
 - [Pull Request Guidelines](#pull-request-guidelines)

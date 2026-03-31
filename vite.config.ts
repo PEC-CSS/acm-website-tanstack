@@ -1,46 +1,47 @@
-import "dotenv/config";
-
-import { defineConfig } from 'vite'
-import { devtools } from '@tanstack/devtools-vite'
-import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-import tailwind from "@tailwindcss/vite";
-import viteReact from '@vitejs/plugin-react'
-import viteTsConfigPaths from 'vite-tsconfig-paths'
-import netlify from '@netlify/vite-plugin-tanstack-start'
 import { execSync } from "node:child_process";
-import pkg from "./package.json" with {type: "json"};
+
+import netlify from "@netlify/vite-plugin-tanstack-start";
+import yaml from "@rollup/plugin-yaml";
+import tailwind from "@tailwindcss/vite";
+import { devtools } from "@tanstack/devtools-vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import { imagetools } from "vite-imagetools";
+import "dotenv/config";
+import pkg from "./package.json" with { type: "json" };
 
 function getCommitHash() {
   try {
-    return execSync("git rev-parse --short HEAD").toString().trim()
+    return execSync("git rev-parse --short HEAD").toString().trim();
   } catch {
     return "unknown";
   }
 }
 
-const config = defineConfig({
+// oxlint-disable-next-line import/no-default-export -- Vite requires default export for config files
+export default defineConfig({
   plugins: [
     devtools(),
     netlify(),
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
-    tailwind(),
+    imagetools(),
+    yaml(),
     tanstackStart(),
+    tailwind(),
     viteReact({
       babel: {
-        plugins: ['babel-plugin-react-compiler'],
+        plugins: ["babel-plugin-react-compiler"],
       },
     }),
   ],
   define: {
     "import.meta.env.COMMIT_HASH": JSON.stringify(getCommitHash()),
-    "import.meta.env.PKG_VERSION": JSON.stringify(pkg.version)
+    "import.meta.env.PKG_VERSION": JSON.stringify(pkg.version),
+  },
+  resolve: {
+    tsconfigPaths: true,
   },
   server: {
     port: 3000,
-  }
-})
-
-export default config
+  },
+});

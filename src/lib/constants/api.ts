@@ -1,4 +1,4 @@
-import env from "$env/server";
+import { env } from "$env/server";
 
 const BASE_URL = env.BACKEND_BASE_URL;
 
