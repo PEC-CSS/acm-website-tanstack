@@ -1,5 +1,5 @@
-import type * as z from "zod";
 import type { UserSchema } from "./schemas";
+import type * as z from "zod";
 
 export interface APIErrorResponse {
   code: string;

@@ -1,1 +1,1 @@
-pnpm check --staged --no-errors-on-unmatched
+pnpm exec lint-staged

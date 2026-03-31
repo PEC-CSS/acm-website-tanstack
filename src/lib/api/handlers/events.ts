@@ -3,7 +3,6 @@ import z from "zod";
 
 import { API_URL } from "$lib/constants/api";
 import { ACM_BRANCHES } from "$lib/constants/org";
-
 import { isErrorResponse } from "../types";
 import {
   BaseEventSchema,
@@ -12,11 +11,7 @@ import {
   EventsArraySchema,
   EventUserSchema,
 } from "../types/schemas";
-import {
-  createErrorResponse,
-  createResponseSchema,
-  toSuccessResponse,
-} from "../utils/helpers";
+import { createErrorResponse, createResponseSchema, toSuccessResponse } from "../utils/helpers";
 import { requireAuth } from "../utils/macros";
 
 export const api = new Elysia({ prefix: "/events" })
@@ -244,12 +239,10 @@ export const api = new Elysia({ prefix: "/events" })
       const { branch } = params;
       const { offset, pageSize } = query;
 
-      const url = `${API_URL.V1.EVENTS.BY_BRANCH(branch)}?${new URLSearchParams(
-        {
-          ...(offset !== undefined && { offset }),
-          ...(pageSize !== undefined && { pageSize }),
-        },
-      )}`;
+      const url = `${API_URL.V1.EVENTS.BY_BRANCH(branch)}?${new URLSearchParams({
+        ...(offset !== undefined && { offset }),
+        ...(pageSize !== undefined && { pageSize }),
+      })}`;
 
       const res = await fetch(url, { method: "GET" });
       const response = await res.json();
@@ -502,23 +495,14 @@ export const api = new Elysia({ prefix: "/events" })
   .get(
     "/search-events",
     async ({ query }) => {
-      const {
-        eventsFrom,
-        eventsTill,
-        offset,
-        pageSize,
-        pattern,
-        branch,
-        ongoing,
-      } = query;
+      const { eventsFrom, eventsTill, offset, pageSize, pattern, branch, ongoing } = query;
 
-      const currOffset =
-        offset === undefined || pageSize === undefined ? "0" : offset;
+      const currOffset = offset === undefined || pageSize === undefined ? "0" : offset;
       const currPageSize = pageSize === undefined ? "150" : pageSize;
 
       const url = `${API_URL.V1.EVENTS.GET_ALL}?${new URLSearchParams({
-        ...{ offset: currOffset },
-        ...{ pageSize: currPageSize },
+        offset: currOffset,
+        pageSize: currPageSize,
       })}`;
 
       const res = await fetch(url, { method: "GET" });
@@ -539,22 +523,14 @@ export const api = new Elysia({ prefix: "/events" })
       const tillDate = eventsTill ? new Date(eventsTill) : null;
 
       const resultArray = validatedArray?.filter(event => {
-        const eventStartDate = event.startDate
-          ? new Date(event.startDate)
-          : null;
+        const eventStartDate = event.startDate ? new Date(event.startDate) : null;
         const eventEndDate = event.endDate ? new Date(event.endDate) : null;
 
-        if (fromDate && eventStartDate && eventStartDate < fromDate)
-          return false;
-        else if (tillDate && eventEndDate && eventEndDate > tillDate)
-          return false;
+        if (fromDate && eventStartDate && eventStartDate < fromDate) return false;
+        else if (tillDate && eventEndDate && eventEndDate > tillDate) return false;
         else if (branch && event.branch !== branch) return false;
-        else if (ongoing && ongoing === "true" && event.ended === true)
-          return false;
-        else if (
-          pattern &&
-          !event.title?.toLowerCase().startsWith(pattern.toLowerCase())
-        )
+        else if (ongoing && ongoing === "true" && event.ended === true) return false;
+        else if (pattern && !event.title?.toLowerCase().startsWith(pattern.toLowerCase()))
           return false;
 
         return true;

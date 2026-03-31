@@ -2,11 +2,10 @@ import type { SessionUser } from "$lib/api/types";
 
 import { createServerFn } from "@tanstack/react-start";
 import { deleteCookie, setCookie } from "@tanstack/react-start/server";
-import { getTreaty } from "src/routes/api.$";
 
 import { cookieBase } from "$lib/constants/api";
 import { decodeJWTPayload } from "$lib/utils";
-
+import { getTreaty } from "../../routes/api.$";
 import { readSession } from "./session";
 
 export const fetchUserFn = createServerFn({ method: "GET" }).handler(
@@ -39,14 +38,12 @@ export const signinFn = createServerFn({ method: "POST" })
     return { success: true };
   });
 
-export const signoutFn = createServerFn({ method: "POST" }).handler(
-  async () => {
-    const api = getTreaty();
+export const signoutFn = createServerFn({ method: "POST" }).handler(async () => {
+  const api = getTreaty();
 
-    await api.auth["sign-out"].post();
-    deleteCookie("session");
-    deleteCookie("user");
+  await api.auth["sign-out"].post();
+  deleteCookie("session");
+  deleteCookie("user");
 
-    return { success: true };
-  },
-);
+  return { success: true };
+});

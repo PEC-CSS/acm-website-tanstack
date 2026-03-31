@@ -1,10 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import {
-  createFileRoute,
-  Link,
-  redirect,
-  useRouter,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, redirect, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { signinFn } from "$lib/server/fns";
@@ -53,17 +48,15 @@ function RouteComponent() {
     <div className="grid grid-cols-20 h-screen">
       <aside className="col-span-7 p-8 gap-4 bg-slate-100 flex flex-col items-center justify-center text-right">
         <h1 className="w-full font-extrabold  text-5xl">Sign in</h1>
-        <p className="w-full font-bold text-xl">
-          Enter your email and password
-        </p>
+        <p className="w-full font-bold text-xl">Enter your email and password</p>
       </aside>
 
       <main className="col-span-13 p-8 bg-slate-50 flex items-center justify-start">
         <form
           className="flex flex-col gap-4"
-          onSubmit={e => {
+          onSubmit={async e => {
             e.preventDefault();
-            form.handleSubmit();
+            await form.handleSubmit();
           }}
         >
           <form.Field name="email">
@@ -112,9 +105,7 @@ function RouteComponent() {
             )}
           </form.Field>
 
-          {serverError && (
-            <p className="bg-red-300 rounded-sm px-3 py-2">{serverError}</p>
-          )}
+          {serverError && <p className="bg-red-300 rounded-sm px-3 py-2">{serverError}</p>}
 
           <div className="flex flex-row-reverse w-full justify-between items-center">
             <form.Subscribe
