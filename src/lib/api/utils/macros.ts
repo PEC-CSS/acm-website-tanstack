@@ -1,10 +1,10 @@
 import type { Designation } from "$lib/types";
-import type { SessionUser } from "../types";
 
 import { Elysia, status } from "elysia";
 
 import { hasRole } from "$lib/types";
 import { decodeJWTPayload } from "$lib/utils";
+import { UserSchema } from "../types/schemas";
 
 const unauthorized = (message: string) =>
   status(401, {
@@ -39,24 +39,24 @@ export const requireAuth = new Elysia({ name: "require-auth" }).macro({
         return unauthorized("Your session has expired. Please sign in again.");
       }
 
-      const userData = userCookie.value as SessionUser | undefined;
+      const { data: parsedUser, success } = UserSchema.safeParse(userCookie.value);
 
-      if (!userData) {
+      if (!success) {
         session.remove();
         return unauthorized("Session data missing. Please sign in again.");
       }
 
       if (enabled !== true) {
-        if (!hasRole(userData.designation, enabled)) {
+        if (!hasRole(parsedUser.designation, enabled)) {
           return forbidden(
-            `This action requires the '${enabled}' role or above. Your current role is '${userData.designation}'.`,
+            `This action requires the '${enabled}' role or above. Your current role is '${parsedUser.designation}'.`,
           );
         }
       }
 
       return {
         token,
-        user: userData,
+        user: parsedUser,
       };
     },
   }),
