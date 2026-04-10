@@ -1,14 +1,14 @@
-- platform: Discord
+- platform: discord
   url: https://discord.gg/D68nVDjczA
 
-- platform: Github
+- platform: github
   url: https://github.com/PEC-CSS/
 
-- platform: Instagram
+- platform: instagram
   url: https://www.instagram.com/pecacm
 
-- platform: Youtube
+- platform: youtube
   url: https://www.youtube.com/c/PECACMStudentChapter
 
-- platform: LinkedIn
+- platform: linkedin
   url: https://www.linkedin.com/company/pec-acm-student-chapter
