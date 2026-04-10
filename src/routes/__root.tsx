@@ -4,6 +4,9 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRouteWithContext, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import { Footer } from "$components/footer";
+import { Navbar } from "$components/navbar";
+
 import { QueryDevtools } from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -46,11 +49,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
-        {children}
+      <body className="bg-orange-200">
+        <Navbar />
+        <div className="bg-orange-100">
+          <main className="min-h-128 max-w-5xl mx-auto">{children}</main>
+        </div>
+        <Footer />
+
         <TanStackDevtools
           config={{
-            position: "bottom-right",
+            position: "top-right",
           }}
           plugins={[
             {
