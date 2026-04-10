@@ -117,10 +117,10 @@ import { z } from "zod";
 import DEFAULT_AVATAR from "$assets/images/default-avatar.png";
 
 // Components
-import Avatar from "$components/avatar";
-import Button from "$components/button";
-import Modal from "$components/modal";
-import Spinner from "$components/spinner";
+import { Avatar } from "$components/avatar";
+import { Button } from "$components/button";
+import { Modal } from "$components/modal";
+import { Spinner } from "$components/spinner";
 
 // Data
 import { USER_DEFAULTS } from "$data/constants";
@@ -155,9 +155,9 @@ import { useMemo, useState } from "react";
 import HERO_IMAGE from "$assets/images/events-hero.jpg";
 
 // Components
-import EventCard from "$components/event-card";
-import FilterBar from "$components/filter-bar";
-import Pagination from "$components/pagination";
+import { EventCard } from "$components/event-card";
+import { FilterBar } from "$components/filter-bar";
+import { Pagination } from "$components/pagination";
 
 // Data
 import { EVENT_CATEGORIES } from "$data/categories";
@@ -209,7 +209,7 @@ import { useState } from "react";
 
 import ICON from "$assets/icons/star.svg";
 
-import Button from "$components/button";
+import { Button } from "$components/button";
 
 import { api } from "$lib/api";
 
@@ -223,7 +223,7 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { api, auth, cache } from "$lib/api";
 
 // Avoid - Mixed categories without separation
-import Button from "$components/button";
+import { Button } from "$components/button";
 import styles from "$styles/app.module.scss";
 import { useState } from "react";
 import type { Props } from "./types";
