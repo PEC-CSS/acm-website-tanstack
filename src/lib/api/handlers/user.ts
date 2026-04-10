@@ -41,7 +41,7 @@ export const api = new Elysia({ prefix: "/user" })
       return toSuccessResponse(response);
     },
     {
-      requireAuth: true,
+      requireAuth: "Admin",
       body: z.object({
         email: z.email("Please provide a valid email"),
         newRole: z.string().min(1, "Role is required"),

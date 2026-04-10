@@ -51,6 +51,27 @@ All responses follow a consistent JSON structure with appropriate HTTP status co
         email: "bruh@example.com",
       },
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "Bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    tags: [
+      {
+        name: "Authentication",
+        description:
+          "Endpoints for user authentication, token verification, and session management. Includes user login, email verification, and ~~password reset~~ operations.",
+      },
+      {
+        name: "Health",
+        description:
+          "Endpoints for monitoring service health and status. Includes health checks, uptime information, and upstream dependency status.",
+      },
+    ],
   },
   mapJsonSchema: {
     zod: z.toJSONSchema,

@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { BranchEnum, DesignationEnum } from "$lib/types";
+import { AcmBranchEnum, DesignationEnum } from "$lib/types";
 
 export const BaseUserSchema = z.object({
   id: z.number(),
@@ -37,7 +37,7 @@ export const UpstreamLoginResponseSchema = z.object({
 export const BaseEventSchema = z.object({
   id: z.number().optional(),
   title: z.string().optional(),
-  branch: BranchEnum.optional(),
+  branch: AcmBranchEnum.optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   description: z.string().optional(),

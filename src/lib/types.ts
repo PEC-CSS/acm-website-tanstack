@@ -2,7 +2,17 @@ import z from "zod";
 
 import { ACM_BRANCHES, DESIGNATIONS } from "./constants/org";
 
-export const BranchEnum = z.enum(ACM_BRANCHES);
+export const AcmBranchEnum = z.enum(ACM_BRANCHES).meta({
+  title: "ACM Branch Name",
+  "x-enumDescriptions": {
+    DEVELOPMENT: "Development",
+    AI: "Artificial Intelligence",
+    CP: "Competitive Programming",
+    CYBER: "Cyber-Security",
+    SOCIALS: "Social",
+    WIT: "Women In Tech",
+  },
+});
 
 export type Designation = (typeof DESIGNATIONS)[number];
 
