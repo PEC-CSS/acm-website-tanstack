@@ -6,13 +6,11 @@
     "module": "ESNext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": false,
     "noEmit": true,
-
     /* Linting */
     "skipLibCheck": true,
     "strict": true,
@@ -28,7 +26,8 @@
       "$env/*": ["./src/lib/env/*"],
       "$emails/*": ["./src/emails/*"],
       "$hooks/*": ["./src/hooks/*"],
-      "$lib/*": ["./src/lib/*"]
+      "$lib/*": ["./src/lib/*"],
+      "$styles/*": ["./src/styles/*"]
     }
   }
 }

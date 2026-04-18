@@ -61,3 +61,12 @@ export const API_URL = {
     HELLO: `${BASE_URL}/hello`,
   },
 } as const;
+
+export const cookieBase = (exp: number) =>
+  ({
+    httpOnly: true,
+    sameSite: "lax",
+    path: "/",
+    expires: new Date(exp * 1000),
+    secure: process.env.NODE_ENV === "production",
+  }) as const;

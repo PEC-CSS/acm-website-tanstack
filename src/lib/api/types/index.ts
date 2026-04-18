@@ -1,3 +1,6 @@
+import type { UserSchema } from "./schemas";
+import type * as z from "zod";
+
 export interface APIErrorResponse {
   code: string;
   message: string;
@@ -9,6 +12,8 @@ export interface ErrorResponse {
   message: string;
   timestamp: string;
 }
+
+export type SessionUser = z.infer<typeof UserSchema>;
 
 export function isErrorResponse(res: unknown): res is APIErrorResponse {
   return (

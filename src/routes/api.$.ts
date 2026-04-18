@@ -1,3 +1,4 @@
+import { createPinoLogger } from "@bogeychan/elysia-logger";
 import { treaty } from "@elysiajs/eden";
 import { openapi } from "@elysiajs/openapi";
 import { createFileRoute } from "@tanstack/react-router";
@@ -7,9 +8,39 @@ import * as z from "zod";
 
 import { auth, events, user } from "$lib/api";
 
+const log = createPinoLogger({
+  level: "debug",
+  transport: {
+    target: "pino-pretty",
+    options: {
+      colorize: true,
+      translateTime: "mm/dd/yyyy HH:MM:ss",
+      ignore: "pid,hostname,req,request,responseTime",
+      messageFormat: "{req.method} {req.url} - {responseTime}ms",
+    },
+  },
+});
+
 const app = new Elysia({
   prefix: "/api",
 })
+  .use(
+    log.into({
+      autoLogging: {
+        ignore() {
+          return false;
+        },
+      },
+      customProps(ctx) {
+        return {
+          req: {
+            method: ctx.request.method,
+            url: new URL(ctx.request.url).pathname,
+          },
+        };
+      },
+    }),
+  )
   .use(
     openapi({
       path: "/docs",
@@ -50,6 +81,8 @@ export const Route = createFileRoute("/api/$")({
     handlers: {
       GET: handle,
       POST: handle,
+      DELETE: handle,
+      PUT: handle,
     },
   },
 });
