@@ -52,11 +52,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-screen bg-bg text-text">
+      <body className="bg-gray-200">
         {children}
+
         <TanStackDevtools
           config={{
-            position: "bottom-right",
+            position: "top-right",
           }}
           plugins={[
             {

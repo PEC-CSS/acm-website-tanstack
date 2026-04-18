@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "~/*": ["./src/*"],
       "$assets": ["./src/lib/assets/*"],
       "$components/*": ["./src/components/*"],
       "$data": ["./src/data/index.ts"],

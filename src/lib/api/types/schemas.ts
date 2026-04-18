@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { BranchEnum, DesignationEnum } from "$lib/types";
+import { AcmBranchEnum, DesignationEnum } from "$lib/types";
 
 export const BaseUserSchema = z.object({
   id: z.number(),
@@ -17,7 +17,7 @@ export const UserSchema = BaseUserSchema.extend({
   experience: z.number(),
 });
 
-export const APIUserSchema = BaseUserSchema.extend({
+export const UpstreamUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
@@ -28,16 +28,16 @@ export const AuthenticatedUserSchema = z.object({
   user: UserSchema,
 });
 
-export const APILoginResponseSchema = z.object({
+export const UpstreamLoginResponseSchema = z.object({
   jwtToken: z.string(),
-  user: APIUserSchema,
+  user: UpstreamUserSchema,
 });
 
 // everything can be made optional to support =>
 export const BaseEventSchema = z.object({
   id: z.number().optional(),
   title: z.string().optional(),
-  branch: BranchEnum.optional(),
+  branch: AcmBranchEnum.optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   description: z.string().optional(),

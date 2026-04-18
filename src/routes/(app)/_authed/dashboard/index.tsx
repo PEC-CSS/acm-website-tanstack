@@ -1,8 +1,8 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 
-import { signoutFn } from "$lib/server/fns";
+import { signoutFn } from "$lib/fns/auth";
 
-export const Route = createFileRoute("/_authed/dashboard/")({
+export const Route = createFileRoute("/(app)/_authed/dashboard/")({
   component: RouteComponent,
 });
 

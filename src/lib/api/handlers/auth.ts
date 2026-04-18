@@ -9,7 +9,7 @@ import { API_URL, cookieBase } from "$lib/constants/api";
 import { BRANCH_NAMES } from "$lib/constants/org";
 import { decodeJWTPayload } from "$lib/utils";
 import { isErrorResponse } from "../types";
-import { APILoginResponseSchema, AuthenticatedUserSchema, UserSchema } from "../types/schemas";
+import { AuthenticatedUserSchema, UpstreamLoginResponseSchema, UserSchema } from "../types/schemas";
 import { createErrorResponse, createResponseSchema, toSuccessResponse } from "../utils/helpers";
 import { requireAuth } from "../utils/macros";
 
@@ -42,8 +42,9 @@ export const api = new Elysia({ prefix: "/auth" })
         });
       }
 
-      const validated = APILoginResponseSchema.parse(response);
+      const validated = UpstreamLoginResponseSchema.parse(response);
       const claims = decodeJWTPayload(validated.jwtToken);
+
       if (!claims)
         return status(500, {
           success: false,

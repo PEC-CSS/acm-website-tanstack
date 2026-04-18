@@ -1,8 +1,8 @@
 import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { signinFn } from "$lib/server/fns";
+import { signinFn } from "$lib/fns/auth";
 
 export const Route = createFileRoute("/(auth)/sign-in")({
   head: () => ({
@@ -32,7 +32,7 @@ function RouteComponent() {
     },
     onSubmit: async ({ value }) => {
       setServerError(null);
-      const result = await signinFn({ data: value });
+      const result = await signinFn(value.email, value.password);
 
       if (result.error) {
         setServerError(result.error);
@@ -45,13 +45,8 @@ function RouteComponent() {
   });
 
   return (
-    <div className="grid grid-cols-20 h-screen">
-      <aside className="col-span-7 p-8 gap-4 bg-slate-100 flex flex-col items-center justify-center text-right">
-        <h1 className="w-full font-extrabold  text-5xl">Sign in</h1>
-        <p className="w-full font-bold text-xl">Enter your email and password</p>
-      </aside>
-
-      <main className="col-span-13 p-8 bg-slate-50 flex items-center justify-start">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
         <form
           className="flex flex-col gap-4"
           onSubmit={async e => {
@@ -61,16 +56,16 @@ function RouteComponent() {
         >
           <form.Field name="email">
             {field => (
-              <div>
+              <div className="flex flex-col gap-1">
                 <label
                   htmlFor={field.name}
-                  className="text-xl flex flex-col gap-2"
+                  className="text-sm"
                 >
-                  Email Address
+                  Email
                 </label>
                 <input
+                  className="w-full rounded-lg border px-3 py-2 outline-none"
                   id={field.name}
-                  className="border border-slate-600 w-xl px-2 py-4 rounded-sm text-xl"
                   type="email"
                   value={field.state.value}
                   onBlur={field.handleBlur}
@@ -84,17 +79,17 @@ function RouteComponent() {
 
           <form.Field name="password">
             {field => (
-              <div>
+              <div className="flex flex-col gap-1">
                 <label
-                  htmlFor={field.name}
-                  className="text-xl flex flex-col gap-2"
+                  htmlFor="password"
+                  className="text-sm"
                 >
                   Password
                 </label>
                 <input
-                  id={field.name}
-                  className="border border-slate-600 w-xl px-2 py-4 rounded-sm text-xl"
                   type="password"
+                  className="w-full rounded-lg border px-3 py-2 outline-none"
+                  id={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={e => field.handleChange(e.target.value)}
@@ -107,34 +102,24 @@ function RouteComponent() {
 
           {serverError && <p className="bg-red-300 rounded-sm px-3 py-2">{serverError}</p>}
 
-          <div className="flex flex-row-reverse w-full justify-between items-center">
-            <form.Subscribe
-              selector={state => ({
-                isSubmitting: state.isSubmitting,
-                canSubmit: state.canSubmit,
-              })}
-            >
-              {({ isSubmitting, canSubmit }) => (
-                <button
-                  type="submit"
-                  className="bg-slate-500 text-white rounded-sm px-6 py-3 active:scale-96"
-                  disabled={!canSubmit || isSubmitting}
-                >
-                  {isSubmitting ? "Signing in..." : "Sign In"}
-                </button>
-              )}
-            </form.Subscribe>
-
-            <Link
-              to="/"
-              type="button"
-              className="border border-slate-500 rounded-sm px-6 py-3 active:scale-96"
-            >
-              Back
-            </Link>
-          </div>
+          <form.Subscribe
+            selector={state => ({
+              isSubmitting: state.isSubmitting,
+              canSubmit: state.canSubmit,
+            })}
+          >
+            {({ isSubmitting, canSubmit }) => (
+              <button
+                type="submit"
+                className="mt-2 rounded-lg border px-3 py-2 bg-slate-500 text-white active:scale-96"
+                disabled={!canSubmit || isSubmitting}
+              >
+                Sign In
+              </button>
+            )}
+          </form.Subscribe>
         </form>
-      </main>
+      </div>
     </div>
   );
 }

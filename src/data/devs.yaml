@@ -6,41 +6,41 @@
     - Frontend
     - Documentation
   links:
-    - platform: LinkedIn
+    - platform: linkedin
       url: "https://www.linkedin.com/in/harmanjeet-sahota/"
-    - platform: GitHub
+    - platform: github
       url: "https://github.com/Savy011"
 - name: Vidhi Sethi
   roles:
     - Co-Lead
     - Backend
   links:
-    - platform: LinkedIn
+    - platform: linkedin
       url: "https://www.linkedin.com/in/vidhi-sethi-013962319/"
-    - platform: GitHub
+    - platform: github
       url: "https://github.com/vidhipec27"
 - name: Keshav Dham
   avatar: "devs/keshav.jpg"
   roles:
     - Documentation
   links:
-    - platform: LinkedIn
+    - platform: linkedin
       url: "https://www.linkedin.com/in/keshavdham/"
-    - platform: GitHub
+    - platform: github
       url: https://github.com/KD9605
 - name: Mithas Janbade
   roles:
     - Frontend
   links:
-    - platform: LinkedIn
+    - platform: linkedin
       url: "https://www.linkedin.com/in/mithas-janbade-glorytogod/"
-    - platform: GitHub
+    - platform: github
       url: "https://github.com/mjisblessed"
 - name: Matisha Kansal
   roles:
     - Frontend
   links:
-    - platform: LinkedIn
+    - platform: linkedin
       url: "https://www.linkedin.com/in/matisha-kansal/"
-    - platform: GitHub
+    - platform: github
       url: "https://github.com/MatishaKansal"
