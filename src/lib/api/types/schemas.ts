@@ -1,10 +1,6 @@
 import z from "zod";
 
-import { ACM_BRANCHES, DESIGNATIONS } from "$lib/constants/org";
-
-export const BranchEnum = z.enum(ACM_BRANCHES);
-
-export const DesignationEnum = z.enum(DESIGNATIONS);
+import { AcmBranchEnum, DesignationEnum } from "$lib/types";
 
 export const BaseUserSchema = z.object({
   id: z.number(),
@@ -21,20 +17,64 @@ export const UserSchema = BaseUserSchema.extend({
   experience: z.number(),
 });
 
-export const APIUserSchema = BaseUserSchema.extend({
+export const UpstreamUserSchema = BaseUserSchema.extend({
   dp: z.string().nullable(),
   password: z.string(),
   xp: z.number(),
 });
 
+export const AuthenticatedUserSchema = z.object({
+  token: z.string(),
+  user: UserSchema,
+});
+
+export const UpstreamLoginResponseSchema = z.object({
+  jwtToken: z.string(),
+  user: UpstreamUserSchema,
+});
+
+// everything can be made optional to support =>
 export const BaseEventSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().optional(),
+  branch: AcmBranchEnum.optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  description: z.string().optional(),
+  relatedLink: z.string().optional(),
+  venue: z.string().optional(),
+  ended: z.boolean().optional(),
+});
+
+export const EventsArraySchema = z.array(BaseEventSchema).optional();
+
+export const EventEndedEmailSchema = z.object({
+  contributors: z.array(z.string()),
+  publicity: z.array(z.string()),
+  participants: z.array(z.string()),
+  contributorXp: z.number(),
+  publicityXp: z.number(),
+  participantXp: z.number(),
+});
+
+export const EventEndedSIDSchema = z.object({
+  contributors: z.array(z.string()),
+  publicity: z.array(z.string()),
+  participants: z.array(z.number()),
+  contributorXp: z.number(),
+  publicityXp: z.number(),
+  participantXp: z.number(),
+});
+
+const BaseEventUserSchema = z.object({
   id: z.number(),
-  title: z.string(),
-  branch: BranchEnum,
-  startDate: z.string(),
-  endDate: z.string(),
-  description: z.string(),
-  relatedLink: z.string(),
-  venue: z.string(),
-  ended: z.boolean(),
+  email: z.string(),
+  name: z.string(),
+  dp: z.string(),
+});
+
+export const EventUserSchema = z.object({
+  contributors: z.array(BaseEventUserSchema).optional(),
+  publicity: z.array(BaseEventUserSchema).optional(),
+  participants: z.array(BaseEventUserSchema).optional(),
 });

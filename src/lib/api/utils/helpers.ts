@@ -51,6 +51,7 @@ export function createErrorResponse<
   const customMessage = options?.customMessages?.[statusCode];
 
   const message = customMessage ?? "An unexpected error occurred while processing the request";
+
   return status(finalStatusCode, {
     success: false,
     error: res.code,

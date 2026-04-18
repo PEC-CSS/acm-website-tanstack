@@ -4,8 +4,10 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRouteWithContext, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import appCss from "$styles/app.css?url";
+
+import { fetchUserFn } from "$lib/server/fns";
 import { QueryDevtools } from "../integrations/tanstack-query/devtools";
-import appCss from "../styles.css?url";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -36,8 +38,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
-
+  beforeLoad: async () => {
+    const user = await fetchUserFn();
+    return { user };
+  },
   shellComponent: RootDocument,
+  notFoundComponent: () => <div>Not Found</div>,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {

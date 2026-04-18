@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as appIndexRouteImport } from './routes/(app)/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
@@ -16,7 +17,12 @@ import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as appTeamRouteImport } from './routes/(app)/team'
 import { Route as appEventsRouteImport } from './routes/(app)/events'
 import { Route as appBranchesRouteImport } from './routes/(app)/branches'
+import { Route as AuthedDashboardIndexRouteImport } from './routes/_authed/dashboard/index'
 
+const AuthedRoute = AuthedRouteImport.update({
+  id: '/_authed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
   getParentRoute: () => rootRouteImport,
@@ -51,57 +57,90 @@ const appBranchesRoute = appBranchesRouteImport.update({
   path: '/branches',
   getParentRoute: () => appRouteRoute,
 } as any)
+const AuthedDashboardIndexRoute = AuthedDashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => AuthedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof appIndexRoute
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
-  '/': typeof appIndexRoute
+  '/dashboard/': typeof AuthedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof appIndexRoute
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
-  '/': typeof appIndexRoute
+  '/dashboard': typeof AuthedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
+  '/_authed': typeof AuthedRouteWithChildren
   '/(app)/branches': typeof appBranchesRoute
   '/(app)/events': typeof appEventsRoute
   '/(app)/team': typeof appTeamRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/(app)/': typeof appIndexRoute
+  '/_authed/dashboard/': typeof AuthedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/branches' | '/events' | '/team' | '/sign-in' | '/api/$' | '/'
+  fullPaths:
+    | '/'
+    | '/branches'
+    | '/events'
+    | '/team'
+    | '/sign-in'
+    | '/api/$'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/branches' | '/events' | '/team' | '/sign-in' | '/api/$' | '/'
+  to:
+    | '/'
+    | '/branches'
+    | '/events'
+    | '/team'
+    | '/sign-in'
+    | '/api/$'
+    | '/dashboard'
   id:
     | '__root__'
     | '/(app)'
+    | '/_authed'
     | '/(app)/branches'
     | '/(app)/events'
     | '/(app)/team'
     | '/(auth)/sign-in'
     | '/api/$'
     | '/(app)/'
+    | '/_authed/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   appRouteRoute: typeof appRouteRouteWithChildren
+  AuthedRoute: typeof AuthedRouteWithChildren
   authSignInRoute: typeof authSignInRoute
   ApiSplatRoute: typeof ApiSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(app)': {
       id: '/(app)'
       path: ''
@@ -151,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appBranchesRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/_authed/dashboard/': {
+      id: '/_authed/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthedDashboardIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
   }
 }
 
@@ -172,8 +218,20 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
   appRouteRouteChildren,
 )
 
+interface AuthedRouteChildren {
+  AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedDashboardIndexRoute: AuthedDashboardIndexRoute,
+}
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
+  AuthedRoute: AuthedRouteWithChildren,
   authSignInRoute: authSignInRoute,
   ApiSplatRoute: ApiSplatRoute,
 }

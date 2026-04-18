@@ -1,0 +1,74 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**/src/**/*",
+      "**/.vscode/**/*",
+      "**/index.html",
+      "!**/src/routeTree.gen.ts",
+      "!**/src/styles.css"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "attributePosition": "multiline"
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              {
+                "type": true,
+                "source": ["**"]
+              },
+              ":BLANK_LINE:",
+              [":URL:", ":PACKAGE_WITH_PROTOCOL:"],
+              ":BLANK_LINE:",
+              ":NODE:",
+              ":BUN:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              "$assets/**",
+              ":BLANK_LINE:",
+              "$components/**",
+              ":BLANK_LINE:",
+              "$data/**",
+              ":BLANK_LINE:",
+              "$hooks/**",
+              ":BLANK_LINE:",
+              "$lib/**",
+              ":BLANK_LINE:",
+              "$styles/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "arrowParentheses": "asNeeded"
+    }
+  }
+}
