@@ -44,6 +44,7 @@ export const api = new Elysia({ prefix: "/auth" })
 
       const validated = UpstreamLoginResponseSchema.parse(response);
       const claims = decodeJWTPayload(validated.jwtToken);
+
       if (!claims)
         return status(500, {
           success: false,

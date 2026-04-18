@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as appIndexRouteImport } from './routes/(app)/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
@@ -17,12 +16,9 @@ import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as appTeamRouteImport } from './routes/(app)/team'
 import { Route as appEventsRouteImport } from './routes/(app)/events'
 import { Route as appBranchesRouteImport } from './routes/(app)/branches'
-import { Route as AuthedDashboardIndexRouteImport } from './routes/_authed/dashboard/index'
+import { Route as appAuthedRouteRouteImport } from './routes/(app)/_authed/route'
+import { Route as appAuthedDashboardIndexRouteImport } from './routes/(app)/_authed/dashboard/index'
 
-const AuthedRoute = AuthedRouteImport.update({
-  id: '/_authed',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
   getParentRoute: () => rootRouteImport,
@@ -57,90 +53,86 @@ const appBranchesRoute = appBranchesRouteImport.update({
   path: '/branches',
   getParentRoute: () => appRouteRoute,
 } as any)
-const AuthedDashboardIndexRoute = AuthedDashboardIndexRouteImport.update({
+const appAuthedRouteRoute = appAuthedRouteRouteImport.update({
+  id: '/_authed',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appAuthedDashboardIndexRoute = appAuthedDashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
-  getParentRoute: () => AuthedRoute,
+  getParentRoute: () => appAuthedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof appIndexRoute
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
-  '/dashboard/': typeof AuthedDashboardIndexRoute
+  '/': typeof appIndexRoute
+  '/dashboard/': typeof appAuthedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof appIndexRoute
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
-  '/dashboard': typeof AuthedDashboardIndexRoute
+  '/': typeof appIndexRoute
+  '/dashboard': typeof appAuthedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
-  '/_authed': typeof AuthedRouteWithChildren
+  '/(app)/_authed': typeof appAuthedRouteRouteWithChildren
   '/(app)/branches': typeof appBranchesRoute
   '/(app)/events': typeof appEventsRoute
   '/(app)/team': typeof appTeamRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/(app)/': typeof appIndexRoute
-  '/_authed/dashboard/': typeof AuthedDashboardIndexRoute
+  '/(app)/_authed/dashboard/': typeof appAuthedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/branches'
     | '/events'
     | '/team'
     | '/sign-in'
     | '/api/$'
+    | '/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/branches'
     | '/events'
     | '/team'
     | '/sign-in'
     | '/api/$'
+    | '/'
     | '/dashboard'
   id:
     | '__root__'
     | '/(app)'
-    | '/_authed'
+    | '/(app)/_authed'
     | '/(app)/branches'
     | '/(app)/events'
     | '/(app)/team'
     | '/(auth)/sign-in'
     | '/api/$'
     | '/(app)/'
-    | '/_authed/dashboard/'
+    | '/(app)/_authed/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   appRouteRoute: typeof appRouteRouteWithChildren
-  AuthedRoute: typeof AuthedRouteWithChildren
   authSignInRoute: typeof authSignInRoute
   ApiSplatRoute: typeof ApiSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_authed': {
-      id: '/_authed'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(app)': {
       id: '/(app)'
       path: ''
@@ -190,17 +182,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appBranchesRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/_authed/dashboard/': {
-      id: '/_authed/dashboard/'
+    '/(app)/_authed': {
+      id: '/(app)/_authed'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appAuthedRouteRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/_authed/dashboard/': {
+      id: '/(app)/_authed/dashboard/'
       path: '/dashboard'
       fullPath: '/dashboard/'
-      preLoaderRoute: typeof AuthedDashboardIndexRouteImport
-      parentRoute: typeof AuthedRoute
+      preLoaderRoute: typeof appAuthedDashboardIndexRouteImport
+      parentRoute: typeof appAuthedRouteRoute
     }
   }
 }
 
+interface appAuthedRouteRouteChildren {
+  appAuthedDashboardIndexRoute: typeof appAuthedDashboardIndexRoute
+}
+
+const appAuthedRouteRouteChildren: appAuthedRouteRouteChildren = {
+  appAuthedDashboardIndexRoute: appAuthedDashboardIndexRoute,
+}
+
+const appAuthedRouteRouteWithChildren = appAuthedRouteRoute._addFileChildren(
+  appAuthedRouteRouteChildren,
+)
+
 interface appRouteRouteChildren {
+  appAuthedRouteRoute: typeof appAuthedRouteRouteWithChildren
   appBranchesRoute: typeof appBranchesRoute
   appEventsRoute: typeof appEventsRoute
   appTeamRoute: typeof appTeamRoute
@@ -208,6 +220,7 @@ interface appRouteRouteChildren {
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
+  appAuthedRouteRoute: appAuthedRouteRouteWithChildren,
   appBranchesRoute: appBranchesRoute,
   appEventsRoute: appEventsRoute,
   appTeamRoute: appTeamRoute,
@@ -218,20 +231,8 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
   appRouteRouteChildren,
 )
 
-interface AuthedRouteChildren {
-  AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
-}
-
-const AuthedRouteChildren: AuthedRouteChildren = {
-  AuthedDashboardIndexRoute: AuthedDashboardIndexRoute,
-}
-
-const AuthedRouteWithChildren =
-  AuthedRoute._addFileChildren(AuthedRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
-  AuthedRoute: AuthedRouteWithChildren,
   authSignInRoute: authSignInRoute,
   ApiSplatRoute: ApiSplatRoute,
 }

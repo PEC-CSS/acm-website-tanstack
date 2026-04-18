@@ -23,7 +23,7 @@ function RouteComponent() {
   const router = useRouter();
   const { redirect: redirectTo } = Route.useSearch();
 
-  const [_serverError, setServerError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const form = useForm({
     defaultValues: {
@@ -99,6 +99,8 @@ function RouteComponent() {
               </div>
             )}
           </form.Field>
+
+          {serverError && <p className="bg-red-300 rounded-sm px-3 py-2">{serverError}</p>}
 
           <form.Subscribe
             selector={state => ({
