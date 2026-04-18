@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as appIndexRouteImport } from './routes/(app)/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
+import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as appTeamRouteImport } from './routes/(app)/team'
 import { Route as appEventsRouteImport } from './routes/(app)/events'
 import { Route as appBranchesRouteImport } from './routes/(app)/branches'
@@ -28,6 +29,11 @@ const appIndexRoute = appIndexRouteImport.update({
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authSignInRoute = authSignInRouteImport.update({
+  id: '/(auth)/sign-in',
+  path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
 const appTeamRoute = appTeamRouteImport.update({
@@ -50,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
+  '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/': typeof appIndexRoute
 }
@@ -57,6 +64,7 @@ export interface FileRoutesByTo {
   '/branches': typeof appBranchesRoute
   '/events': typeof appEventsRoute
   '/team': typeof appTeamRoute
+  '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/': typeof appIndexRoute
 }
@@ -66,26 +74,29 @@ export interface FileRoutesById {
   '/(app)/branches': typeof appBranchesRoute
   '/(app)/events': typeof appEventsRoute
   '/(app)/team': typeof appTeamRoute
+  '/(auth)/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/(app)/': typeof appIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/branches' | '/events' | '/team' | '/api/$' | '/'
+  fullPaths: '/branches' | '/events' | '/team' | '/sign-in' | '/api/$' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/branches' | '/events' | '/team' | '/api/$' | '/'
+  to: '/branches' | '/events' | '/team' | '/sign-in' | '/api/$' | '/'
   id:
     | '__root__'
     | '/(app)'
     | '/(app)/branches'
     | '/(app)/events'
     | '/(app)/team'
+    | '/(auth)/sign-in'
     | '/api/$'
     | '/(app)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   appRouteRoute: typeof appRouteRouteWithChildren
+  authSignInRoute: typeof authSignInRoute
   ApiSplatRoute: typeof ApiSplatRoute
 }
 
@@ -110,6 +121,13 @@ declare module '@tanstack/react-router' {
       path: '/api/$'
       fullPath: '/api/$'
       preLoaderRoute: typeof ApiSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/sign-in': {
+      id: '/(auth)/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof authSignInRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(app)/team': {
@@ -156,6 +174,7 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
+  authSignInRoute: authSignInRoute,
   ApiSplatRoute: ApiSplatRoute,
 }
 export const routeTree = rootRouteImport
