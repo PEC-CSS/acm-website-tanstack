@@ -10,13 +10,14 @@
  * */
 import z from "zod";
 
+import { PLATFORMS } from "$lib/constants/platforms";
 import { resolveStaticImg, slugify } from "$lib/utils";
 import DEVS from "./devs.yaml";
 import SOCIALS from "./socials.yaml";
 import TEAM from "./team.yaml";
 
 const LinkSchema = z.object({
-  platform: z.string(),
+  platform: z.enum(PLATFORMS),
   url: z.url(),
 });
 
@@ -45,12 +46,7 @@ const TeamSchema = z.object({
   groups: z.array(GroupSchema),
 });
 
-const SocialsSchema = z.array(
-  z.object({
-    platform: z.string(),
-    url: z.url(),
-  }),
-);
+const SocialsSchema = z.array(LinkSchema);
 
 const RoleEnum = z.enum(["Project Lead", "Co-Lead", "Backend", "Frontend", "Documentation"]);
 

@@ -10,19 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthedRouteImport } from './routes/_authed'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as appRouteRouteImport } from './routes/(app)/route'
+import { Route as appIndexRouteImport } from './routes/(app)/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
+import { Route as appTeamRouteImport } from './routes/(app)/team'
+import { Route as appEventsRouteImport } from './routes/(app)/events'
+import { Route as appBranchesRouteImport } from './routes/(app)/branches'
 import { Route as AuthedDashboardIndexRouteImport } from './routes/_authed/dashboard/index'
 
 const AuthedRoute = AuthedRouteImport.update({
   id: '/_authed',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const appRouteRoute = appRouteRouteImport.update({
+  id: '/(app)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appIndexRoute = appIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appRouteRoute,
 } as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
@@ -34,6 +42,21 @@ const authSignInRoute = authSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appTeamRoute = appTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appEventsRoute = appEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appBranchesRoute = appBranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const AuthedDashboardIndexRoute = AuthedDashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
@@ -41,41 +64,69 @@ const AuthedDashboardIndexRoute = AuthedDashboardIndexRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof appIndexRoute
+  '/branches': typeof appBranchesRoute
+  '/events': typeof appEventsRoute
+  '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/dashboard/': typeof AuthedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof appIndexRoute
+  '/branches': typeof appBranchesRoute
+  '/events': typeof appEventsRoute
+  '/team': typeof appTeamRoute
   '/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
   '/dashboard': typeof AuthedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(app)': typeof appRouteRouteWithChildren
   '/_authed': typeof AuthedRouteWithChildren
+  '/(app)/branches': typeof appBranchesRoute
+  '/(app)/events': typeof appEventsRoute
+  '/(app)/team': typeof appTeamRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/api/$': typeof ApiSplatRoute
+  '/(app)/': typeof appIndexRoute
   '/_authed/dashboard/': typeof AuthedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in' | '/api/$' | '/dashboard/'
+  fullPaths:
+    | '/'
+    | '/branches'
+    | '/events'
+    | '/team'
+    | '/sign-in'
+    | '/api/$'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in' | '/api/$' | '/dashboard'
+  to:
+    | '/'
+    | '/branches'
+    | '/events'
+    | '/team'
+    | '/sign-in'
+    | '/api/$'
+    | '/dashboard'
   id:
     | '__root__'
-    | '/'
+    | '/(app)'
     | '/_authed'
+    | '/(app)/branches'
+    | '/(app)/events'
+    | '/(app)/team'
     | '/(auth)/sign-in'
     | '/api/$'
+    | '/(app)/'
     | '/_authed/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  appRouteRoute: typeof appRouteRouteWithChildren
   AuthedRoute: typeof AuthedRouteWithChildren
   authSignInRoute: typeof authSignInRoute
   ApiSplatRoute: typeof ApiSplatRoute
@@ -90,12 +141,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(app)': {
+      id: '/(app)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/': {
+      id: '/(app)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof appIndexRouteImport
+      parentRoute: typeof appRouteRoute
     }
     '/api/$': {
       id: '/api/$'
@@ -111,6 +169,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/team': {
+      id: '/(app)/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof appTeamRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/events': {
+      id: '/(app)/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof appEventsRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/branches': {
+      id: '/(app)/branches'
+      path: '/branches'
+      fullPath: '/branches'
+      preLoaderRoute: typeof appBranchesRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/_authed/dashboard/': {
       id: '/_authed/dashboard/'
       path: '/dashboard'
@@ -120,6 +199,24 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface appRouteRouteChildren {
+  appBranchesRoute: typeof appBranchesRoute
+  appEventsRoute: typeof appEventsRoute
+  appTeamRoute: typeof appTeamRoute
+  appIndexRoute: typeof appIndexRoute
+}
+
+const appRouteRouteChildren: appRouteRouteChildren = {
+  appBranchesRoute: appBranchesRoute,
+  appEventsRoute: appEventsRoute,
+  appTeamRoute: appTeamRoute,
+  appIndexRoute: appIndexRoute,
+}
+
+const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
+  appRouteRouteChildren,
+)
 
 interface AuthedRouteChildren {
   AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
@@ -133,7 +230,7 @@ const AuthedRouteWithChildren =
   AuthedRoute._addFileChildren(AuthedRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  appRouteRoute: appRouteRouteWithChildren,
   AuthedRoute: AuthedRouteWithChildren,
   authSignInRoute: authSignInRoute,
   ApiSplatRoute: ApiSplatRoute,
