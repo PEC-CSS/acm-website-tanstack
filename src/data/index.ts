@@ -13,7 +13,21 @@ import z from "zod";
 import { resolveStaticImg, slugify } from "$lib/utils";
 import DEVS from "./devs.yaml";
 import SOCIALS from "./socials.yaml";
-import TEAM from "./team.yaml";
+
+const teamModules = import.meta.glob("./team/*.{yaml,yml}", { eager: true });
+
+const TEAM_FILES = Object.entries(teamModules).reduce(
+  (acc, [path, mod]) => {
+    const year = path.match(/(\d{4})\.(yaml|yml)$/)?.[1];
+
+    if (year && mod !== null && typeof mod === "object" && "default" in mod) {
+      acc[year] = mod.default;
+    }
+
+    return acc;
+  },
+  {} as Record<string, unknown>,
+);
 
 const LinkSchema = z.object({
   platform: z.string(),
@@ -22,28 +36,33 @@ const LinkSchema = z.object({
 
 const MemberSchema = z.object({
   name: z.string(),
-  avatar: z.string().transform(av => resolveStaticImg(av)),
   links: z.array(LinkSchema).default([]),
 });
 
-const CoreMemberSchema = MemberSchema.extend({
-  title: z.string(),
-});
+const createTeamSchema = (year: string) => {
+  const CoreMemberSchema = MemberSchema.extend({
+    title: z.string(),
+    avatar: z.string().transform(av => resolveStaticImg(`leads/${year}/${av}`)),
+  });
+  const GroupSchema = z
+    .object({
+      name: z.string(),
+      leads: z.array(
+        MemberSchema.extend({
+          avatar: z.string().transform(av => resolveStaticImg(`leads/${year}/${av}`)),
+        }),
+      ),
+    })
+    .transform(group => ({
+      ...group,
+      id: slugify(group.name),
+    }));
 
-const GroupSchema = z
-  .object({
-    name: z.string(),
-    leads: z.array(MemberSchema),
-  })
-  .transform(group => ({
-    ...group,
-    id: slugify(group.name),
-  }));
-
-const TeamSchema = z.object({
-  core: z.array(CoreMemberSchema),
-  groups: z.array(GroupSchema),
-});
+  return z.object({
+    core: z.array(CoreMemberSchema),
+    groups: z.array(GroupSchema),
+  });
+};
 
 const SocialsSchema = z.array(
   z.object({
@@ -67,8 +86,15 @@ const DevSchema = z.array(
 export const DEV_DATA = DevSchema.parse(DEVS);
 export type TDevData = z.infer<typeof DevSchema>;
 
-export const TEAM_DATA = TeamSchema.parse(TEAM);
-export type TTeamData = z.infer<typeof TeamSchema>;
+export const TEAM_DATA_BY_YEAR = Object.entries(TEAM_FILES).reduce(
+  (acc, [year, data]) => {
+    const TeamSchema = createTeamSchema(year);
+    acc[year] = TeamSchema.parse(data);
+    return acc;
+  },
+  {} as Record<string, z.infer<ReturnType<typeof createTeamSchema>>>,
+);
+export type TTeamData = z.infer<ReturnType<typeof createTeamSchema>>;
 
 export const SOCIALS_DATA = SocialsSchema.parse(SOCIALS);
 export type TSocialsData = z.infer<typeof SocialsSchema>;
