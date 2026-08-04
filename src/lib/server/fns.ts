@@ -2,6 +2,7 @@ import type { SessionUser } from "$lib/api/types";
 
 import { createServerFn } from "@tanstack/react-start";
 import { deleteCookie, setCookie } from "@tanstack/react-start/server";
+import { z } from "zod";
 
 import { cookieBase } from "$lib/constants/api";
 import { decodeJWTPayload } from "$lib/utils";
@@ -16,8 +17,13 @@ export const fetchUserFn = createServerFn({ method: "GET" }).handler(
   },
 );
 
+const SignInDataSchema = z.object({
+  email: z.email(),
+  password: z.string().nonempty(),
+});
+
 export const signinFn = createServerFn({ method: "POST" })
-  .inputValidator((data: { email: string; password: string }) => data)
+  .validator(SignInDataSchema)
   .handler(async ({ data }) => {
     const api = getTreaty();
 
