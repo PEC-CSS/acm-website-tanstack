@@ -1,6 +1,6 @@
-import { render, toPlainText } from "@react-email/components";
 import Elysia from "elysia";
 import nodemailer from "nodemailer";
+import { render, toPlainText } from "react-email";
 import z from "zod";
 
 import VerifyEmail from "$emails/verify";

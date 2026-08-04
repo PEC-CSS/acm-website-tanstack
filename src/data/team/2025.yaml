@@ -1,7 +1,7 @@
 core:
   - name: Gurmehar Singh
     title: Chairperson
-    avatar: "leads/gurmehar.jpg"
+    avatar: "gurmehar.jpg"
     links:
       - platform: LinkedIn
         url: "https://www.linkedin.com/in/gurmehar-singh-87636425a/"
@@ -11,7 +11,7 @@ core:
         url: "mailto:gurmeharsingh.bt22cse@pec.edu.in"
   - name: Anubhav Pandey
     title: Vice Chairperson
-    avatar: "leads/anubhav.jpg"
+    avatar: "anubhav.jpg"
     links:
       - platform: LinkedIn
         url: "https://www.linkedin.com/in/anubhav3p/"
@@ -21,7 +21,7 @@ core:
         url: "mailto:anubhavpandey.bt22cseds@pec.edu.in"
   - name: Gaurav Gupta
     title: Treasurer
-    avatar: "leads/gaurav.jpg"
+    avatar: "gaurav.jpg"
     links:
       - platform: LinkedIn
         url: "https://www.linkedin.com/in/gaurav-gupta-7801a625b/"
@@ -31,7 +31,7 @@ core:
         url: "mailto:gauravgupta.bt22cse@pec.edu.in"
   - name: Harshul Arora
     title: Webmaster
-    avatar: "leads/harshul.jpg"
+    avatar: "harshul.jpg"
     links:
       - platform: LinkedIn
         url: "https://www.linkedin.com/in/harshul-arora-7a264b250/"
@@ -44,14 +44,14 @@ groups:
   - name: Competitive Programming
     leads:
       - name: Sambhav Jain
-        avatar: "leads/sambhav.jpg"
+        avatar: "sambhav.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/sambhav2j/"
           - platform: GitHub
             url: "https://github.com/SambhavJain74"
       - name: Chetanya Mahana
-        avatar: "leads/chetanya.jpg"
+        avatar: "chetanya.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/chetanya-mahana-212a95258/"
@@ -61,21 +61,21 @@ groups:
   - name: Artificial Intelligence
     leads:
       - name: Arnav Vikas Garg
-        avatar: "leads/arnav.jpg"
+        avatar: "arnav.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/arnav-vikas-g-6079a2218/"
           - platform: GitHub
             url: "https://github.com/ArnavVikasGarg"
       - name: Aaditya Sharma
-        avatar: "leads/aaditya.jpg"
+        avatar: "aaditya.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/aaditya-sharma-255133257/"
           - platform: GitHub
             url: "https://github.com/aadityasharma911"
       - name: Hardik Ahuja
-        avatar: "leads/hardik.jpg"
+        avatar: "hardik.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/hardik-ahuja-b4bb07252/"
@@ -83,14 +83,14 @@ groups:
   - name: Development
     leads:
       - name: Kritika Jari
-        avatar: "leads/kritika.jpg"
+        avatar: "kritika.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/krittika-jari-676897268/"
           - platform: GitHub
             url: "https://github.com/krittika2004"
       - name: Harshit Minhas
-        avatar: "leads/harshit.jpg"
+        avatar: "harshit.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/harshit-minhas-879026253/"
@@ -100,7 +100,7 @@ groups:
   - name: Open Source
     leads:
       - name: Raghav Sharma
-        avatar: "leads/raghav.jpg"
+        avatar: "raghav.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/raghav-sharma-0b8785270/"
@@ -110,14 +110,14 @@ groups:
   - name: Cyber-Security
     leads:
       - name: Aryan
-        avatar: "leads/aryan.jpg"
+        avatar: "aryan.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/aryan1006/"
           - platform: GitHub
             url: "https://github.com/ary-a-n"
       - name: Keshav Arora
-        avatar: "leads/keshav.jpg"
+        avatar: "keshav.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/keshavarorapec/"
@@ -127,14 +127,14 @@ groups:
   - name: Socials
     leads:
       - name: Prasuk Jain
-        avatar: "leads/prasuk.jpg"
+        avatar: "prasuk.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/prasuk-jain-1053b5244/"
           - platform: GitHub
             url: "https://github.com/prasukjain07"
       - name: Shreya Pahuja
-        avatar: "leads/shreya.jpg"
+        avatar: "shreya.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/sp49/"
@@ -144,14 +144,14 @@ groups:
   - name: Women In Tech
     leads:
       - name: Akanksha Narula
-        avatar: "leads/akanksha.jpg"
+        avatar: "akanksha.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/akanksha-narula-b6ba26249/"
           - platform: GitHub
             url: "https://github.com/AkankshaNarula"
       - name: Vanshika Garg
-        avatar: "leads/vanshika.jpg"
+        avatar: "vanshika.jpg"
         links:
           - platform: LinkedIn
             url: "https://www.linkedin.com/in/vanshika-330333271/"

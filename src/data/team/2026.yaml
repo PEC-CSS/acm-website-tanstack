@@ -1,0 +1,172 @@
+core:
+  - name: Vidhi Sethi
+    title: Secretary
+    avatar: "vidhi.jpg"
+    links:
+      - platform: LinkedIn
+        url: "https://www.linkedin.com/in/vidhi-sethi-013962319"
+      - platform: GitHub
+        url: "https://github.com/vidhipec27"
+      - platform: E-Mail
+        url: "mailto:vidhisethi.bt23cse@pec.edu.in"
+
+  - name: Bhavik Vishal Sharma
+    title: Joint Secretary
+    avatar: "bhavik.jpg"
+    links:
+      - platform: LinkedIn
+        url: "https://www.linkedin.com/in/bhavik-sharma-09a6391ab/"
+      - platform: GitHub
+        url: "https://github.com/itsbhavik1"
+      - platform: E-Mail
+        url: "mailto:bhavikvishalsharma.bt23ele@pec.edu.in"
+
+  - name: Aayush Sharma
+    title: Assitant Secretary
+    avatar: "aayush.jpg"
+    links:
+      - platform: LinkedIn
+        url: "https://www.linkedin.com/in/aayushsharma7"
+      - platform: E-Mail
+        url: "mailto:aayushsharma.bt24ece@pec.edu.in"
+
+  - name: Himanshi Garg
+    title: Treasurer
+    avatar: "himanshi.jpg"
+    links:
+      - platform: LinkedIn
+        url: "https://www.linkedin.com/in/himanshi-garg-22b8a32a5"
+      - platform: GitHub
+        url: "https://github.com/himanshig05"
+      - platform: E-Mail
+        url: "mailto:himanshigarg.bt23cse@pec.edu.in"
+
+  - name: Harmanjeet Singh Sahota
+    title: Webmaster
+    avatar: "harman.jpg"
+    links:
+      - platform: LinkedIn
+        url: "https://www.linkedin.com/in/harmanjeet-sahota"
+      - platform: GitHub
+        url: "https://github.com/Savy011"
+      - platform: E-Mail
+        url: "mailto:harmanjeetsinghsahota.bt23mech@pec.edu.in"
+
+groups:
+  - name: Competitive Programming
+    leads:
+      - name: Sachin
+        avatar: "sachin.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/sachin-prmndani"
+
+      - name: Dheeraj Kumar
+        avatar: "dheeraj.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/dheeraj-kumar-4a5961289"
+
+  - name: Artificial Intelligence/Machine Learning
+    leads:
+      - name: Abhipsit Bajpai
+        avatar: "abhipsit.png"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/abhipsit-bajpai-4b4195295"
+
+      - name: Amisha Gupta
+        avatar: "amisha.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/amisha-gupta-567566291"
+          - platform: GitHub
+            url: "https://github.com/Amisha2700"
+
+      - name: Mithas Janbade
+        avatar: "mithas.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/mithas-janbade-glorytogod"
+          - platform: GitHub
+            url: "https://github.com/mjisblessed"
+
+  - name: Development
+    leads:
+      - name: Kanavpreet Singh
+        avatar: "kanavpreet.png"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/kanavpreet-singh-khurana-b1544b316"
+          - platform: GitHub
+            url: "https://github.com/Kanavpreet-Singh"
+
+      - name: Pranav Bhatia
+        avatar: "pranav.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/p-bhatia"
+          - platform: GitHub
+            url: "https://github.com/pranavb1234"
+
+      - name: Ananyaa Priyadarshini
+        avatar: "ananyaa.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/ananyaa-priyadarshini"
+          - platform: GitHub
+            url: "https://github.com/Ananyaa88"
+
+  - name: Socials
+    leads:
+      - name: Yatin Kanwar
+        avatar: "yatin.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/yatin-kanwar/"
+
+  - name: Cyber-Security
+    leads:
+      - name: Madhav
+        avatar: "madhav.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/madhav-virmani-854792347"
+
+  - name: Alumni Relations
+    leads:
+      - name: Anav Jain
+        avatar: "anav.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/anav-jain-643394294"
+          - platform: GitHub
+            url: "https://github.com/anavjain06"
+
+  - name: Women In Tech
+    leads:
+      - name: Diya Bansal
+        avatar: "diya.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/diya-bansal-800751304"
+          - platform: GitHub
+            url: "https://github.com/Diya104"
+
+  - name: Operations and Logistics
+    leads:
+      - name: Mihira Gupta
+        avatar: "mihira.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/mihiragupta"
+          - platform: GitHub
+            url: "https://github.com/mihira4"
+
+  - name: Marketing and Outreach
+    leads:
+      - name: Rishuraj Pandey
+        avatar: "rishuraj.jpg"
+        links:
+          - platform: LinkedIn
+            url: "https://www.linkedin.com/in/rishuraj-pandey"
