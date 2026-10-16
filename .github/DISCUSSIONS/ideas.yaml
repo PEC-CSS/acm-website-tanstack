@@ -1,0 +1,32 @@
+title: "idea: "
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        half-baked ideas welcome. if it turns into something concrete,
+        it can graduate to a feature issue later.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: what's the itch?
+      description: describe the problem or annoyance, not the solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: what could it look like?
+      description: rough sketches, links, "idk but something like X"
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: what does it touch?
+      options:
+        - ui / ux
+        - docs
+        - tooling / dx
+        - something else
