@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 question / discussion
+    url: https://github.com/PEC-CSS/acm-website-tanstack/discussions
+    about: not a bug or feature? ask here instead
