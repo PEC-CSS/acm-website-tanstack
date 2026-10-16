@@ -1,0 +1,36 @@
+title: "q: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        got a question? ask away. no such thing as a dumb one.
+        quick search first though, it might already be answered :)
+
+  - type: textarea
+    id: question
+    attributes:
+      label: what are you trying to do?
+      description: the goal first, not just the error. the why helps a lot.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: what have you tried?
+      description: code, commands, links you read. or "nothing yet", that's fine too.
+
+  - type: input
+    id: env
+    attributes:
+      label: environment
+      description: browser / OS / version, if it's relevant
+      placeholder: e.g. firefox 130, arch linux, v0.4.2
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: checklist
+      options:
+        - label: i searched existing discussions and issues
+          required: true
